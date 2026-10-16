@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#17151d" />
+  <meta name="description" content="一个实用但不太正经的个人主页：联系我、认识我、顺便被我逗一下。" />
+  <title>WZT 的人类观察站</title>
+  <style>
+    :root {
+      --ink: #17151d;
+      --paper: #f4efd8;
+      --acid: #d7ff3f;
+      --pink: #ff6bcb;
+      --purple: #8c5bff;
+      --orange: #ff9b4a;
+      --line: rgba(23, 21, 29, .18);
+      --shadow: 7px 7px 0 var(--ink);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Trebuchet MS", "Microsoft YaHei", system-ui, sans-serif;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .25;
+      background-image: radial-gradient(var(--ink) .7px, transparent .7px);
+      background-size: 8px 8px;
+      mix-blend-mode: multiply;
+      z-index: 5;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+
+    .wrap { width: min(1160px, calc(100% - 36px)); margin: 0 auto; }
+    .topbar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 22px 0 12px; font-weight: 900; letter-spacing: .04em;
+    }
+    .stamp { display: inline-flex; align-items: center; gap: 9px; }
+    .stamp-dot { width: 13px; height: 13px; border: 2px solid var(--ink); background: var(--pink); transform: rotate(45deg); }
+    .topbar nav { display: flex; gap: 18px; font-size: 13px; text-transform: uppercase; }
+    .topbar nav a { border-bottom: 2px solid transparent; }
+    .topbar nav a:hover { border-color: var(--ink); }
+
+    .hero { padding: 64px 0 56px; position: relative; }
+    .hero-grid { display: grid; grid-template-columns: 1.08fr .92fr; gap: 48px; align-items: center; }
+    .eyebrow { font-size: 13px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; margin: 0 0 15px; }
+    h1 { font-size: clamp(58px, 10vw, 132px); line-height: .82; letter-spacing: -.09em; margin: 0 0 28px; max-width: 780px; }
+    h1 .highlight { display: inline-block; background: var(--acid); padding: 0 13px 7px 7px; transform: rotate(-2deg); box-shadow: 8px 8px 0 var(--purple); }
+    .hero-copy { max-width: 560px; font-size: 18px; line-height: 1.7; margin: 0 0 26px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn { border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); padding: 12px 17px; border-radius: 999px; font-weight: 900; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+    .btn:hover { transform: translate(2px, 2px) rotate(-1deg); box-shadow: 2px 2px 0 var(--ink); }
+    .btn.primary { background: var(--pink); }
+    .btn.secondary { background: transparent; }
+
+    .portrait-card { position: relative; transform: rotate(3deg); }
+    .portrait-frame { background: var(--purple); padding: 16px; border: 3px solid var(--ink); box-shadow: var(--shadow); border-radius: var(--radius); }
+    .portrait { aspect-ratio: 4 / 5; border: 3px solid var(--ink); border-radius: 15px; overflow: hidden; background: var(--acid); position: relative; display: grid; place-items: center; }
+    .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+    .portrait-note { position: absolute; right: 11px; bottom: 11px; background: var(--paper); border: 2px solid var(--ink); padding: 5px 9px; font-size: 11px; font-weight: 900; transform: rotate(-5deg); }
+    .sticker { position: absolute; z-index: 2; font-weight: 900; border: 3px solid var(--ink); padding: 8px 12px; box-shadow: 4px 4px 0 var(--ink); }
+    .sticker.one { top: -22px; right: -15px; background: var(--orange); transform: rotate(8deg); }
+    .sticker.two { bottom: 22px; left: -23px; background: var(--pink); transform: rotate(-10deg); }
+
+    .ticker { border-block: 3px solid var(--ink); background: var(--ink); color: var(--acid); overflow: hidden; white-space: nowrap; font-weight: 900; letter-spacing: .08em; }
+    .ticker span { display: inline-block; padding: 13px 0; animation: ticker 19s linear infinite; }
+    @keyframes ticker { to { transform: translateX(-50%); } }
+
+    section { padding: 90px 0; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 26px; }
+    .section-head h2 { margin: 0; font-size: clamp(34px, 5vw, 65px); line-height: .9; letter-spacing: -.06em; }
+    .section-head p { max-width: 320px; margin: 0; font-size: 14px; line-height: 1.55; }
+
+    .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    .contact-card { border: 3px solid var(--ink); border-radius: var(--radius); padding: 20px; background: white; box-shadow: 5px 5px 0 var(--ink); min-height: 220px; display: flex; flex-direction: column; justify-content: space-between; }
+    .contact-card:nth-child(2) { background: var(--acid); transform: translateY(16px) rotate(1deg); }
+    .contact-card:nth-child(3) { background: var(--pink); transform: rotate(-1deg); }
+    .card-top { display: flex; justify-content: space-between; align-items: start; }
+    .icon { font-size: 33px; }
+    .label { font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: .12em; opacity: .72; }
+    .contact-card h3 { font-size: 27px; margin: 10px 0 5px; }
+    .contact-card code { font-family: inherit; font-size: 16px; font-weight: 900; word-break: break-all; }
+    .copy-btn { border: 2px solid var(--ink); background: transparent; border-radius: 999px; padding: 8px 12px; font-weight: 900; cursor: pointer; align-self: flex-start; }
+    .copy-btn:hover { background: var(--ink); color: var(--acid); }
+    .contact-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .tag-cloud {
+      position: relative; min-height: 370px; margin-top: 28px; padding: 24px;
+      border: 3px dashed var(--ink); border-radius: var(--radius);
+      background: rgba(255,255,255,.42); isolation: isolate;
+    }
+    .tag-cloud::before {
+      content: "头衔认证：本人点头，江湖传播"; position: absolute; top: 13px; right: 16px;
+      z-index: 1; padding: 6px 10px; border: 2px solid var(--ink); background: var(--paper);
+      font-size: 11px; font-weight: 900; transform: rotate(2deg);
+    }
+    .tag {
+      --tilt: 0deg; --tag-size: 28px; --float-speed: 5s;
+      position: absolute; display: inline-flex; align-items: center; justify-content: center;
+      max-width: calc(100% - 24px); padding: .48em .72em; border: 3px solid var(--ink);
+      border-radius: 999px; background: white; box-shadow: 4px 4px 0 var(--ink);
+      font-size: clamp(20px, var(--tag-size), 42px); font-weight: 1000; line-height: 1.05;
+      white-space: nowrap; animation: floatTag var(--float-speed) ease-in-out infinite;
+    }
+    .tag:nth-child(1) { top: 13%; left: 5%; --tag-size: 40px; --tilt: -5deg; --float-speed: 4.4s; background: var(--pink); }
+    .tag:nth-child(2) { top: 29%; left: 37%; --tag-size: 30px; --tilt: 3deg; --float-speed: 5.2s; background: var(--acid); }
+    .tag:nth-child(3) { top: 14%; right: 5%; --tag-size: 35px; --tilt: 6deg; --float-speed: 4.8s; background: var(--orange); }
+    .tag:nth-child(4) { top: 54%; left: 11%; --tag-size: 27px; --tilt: 2deg; --float-speed: 5.6s; background: white; }
+    .tag:nth-child(5) { top: 55%; left: 39%; --tag-size: 34px; --tilt: -3deg; --float-speed: 4.6s; background: var(--pink); }
+    .tag:nth-child(6) { top: 41%; right: 7%; --tag-size: 30px; --tilt: 5deg; --float-speed: 5.4s; background: var(--acid); }
+    .tag:nth-child(7) { top: 79%; left: 24%; --tag-size: 26px; --tilt: -2deg; --float-speed: 5s; background: var(--orange); }
+    .tag:nth-child(8) { top: 77%; right: 14%; --tag-size: 32px; --tilt: 4deg; --float-speed: 4.9s; background: white; }
+    @keyframes floatTag {
+      0%, 100% { transform: translateY(0) rotate(var(--tilt)); }
+      50% { transform: translateY(-11px) rotate(calc(var(--tilt) + 2deg)); }
+    }
+
+    .about-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 34px; align-items: start; }
+    .manifesto { font-size: clamp(27px, 4vw, 47px); line-height: 1.05; letter-spacing: -.05em; margin: 0; }
+    .manifesto em { background: var(--orange); font-style: normal; padding: 0 6px; }
+    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .fact { padding: 18px; border: 3px solid var(--ink); background: white; border-radius: 17px; min-height: 125px; }
+    .fact b { display: block; font-size: 29px; margin-bottom: 8px; }
+    .fact span { font-size: 13px; line-height: 1.5; }
+
+    .chaos { background: var(--purple); border-block: 3px solid var(--ink); }
+    .chaos-box { background: var(--acid); border: 3px solid var(--ink); box-shadow: 8px 8px 0 var(--ink); border-radius: var(--radius); padding: 30px; display: grid; grid-template-columns: 1fr auto; gap: 25px; align-items: center; }
+    .chaos-box h2 { font-size: clamp(31px, 5vw, 68px); line-height: .86; letter-spacing: -.07em; margin: 0 0 13px; }
+    .chaos-box p { max-width: 620px; line-height: 1.6; margin: 0; }
+    .fortune { min-width: 190px; min-height: 105px; border: 3px solid var(--ink); background: var(--pink); border-radius: 18px; padding: 15px; font-weight: 900; display: grid; place-items: center; text-align: center; transform: rotate(2deg); }
+    .fortune-btn { margin-top: 12px; background: var(--ink); color: var(--acid); border: 0; border-radius: 999px; padding: 11px 15px; font-weight: 900; cursor: pointer; }
+
+    footer { padding: 27px 0 45px; display: flex; justify-content: space-between; gap: 20px; font-size: 12px; font-weight: 900; }
+    .secret { border: 0; background: transparent; cursor: pointer; text-decoration: underline; font-weight: 900; }
+    .toast { position: fixed; left: 50%; bottom: 22px; transform: translate(-50%, 140px); z-index: 10; background: var(--ink); color: var(--acid); padding: 12px 17px; border: 2px solid var(--acid); border-radius: 999px; font-weight: 900; transition: transform .25s ease; }
+    .toast.show { transform: translate(-50%, 0); }
+
+    @media (max-width: 800px) {
+      .hero-grid, .about-grid, .chaos-box { grid-template-columns: 1fr; }
+      .hero { padding-top: 40px; }
+      .portrait-card { max-width: 450px; width: 88%; margin: 20px auto 0; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .contact-card:nth-child(2), .contact-card:nth-child(3) { transform: none; }
+      .facts { margin-top: 10px; }
+      .section-head { display: block; }
+      .section-head p { margin-top: 14px; }
+      .tag-cloud { min-height: auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px 10px; padding: 58px 14px 24px; }
+      .tag { position: relative; inset: auto; max-width: 100%; white-space: normal; }
+    }
+    @media (max-width: 520px) {
+      .wrap { width: min(100% - 24px, 1160px); }
+      .topbar nav { gap: 9px; font-size: 10px; }
+      h1 { font-size: 64px; }
+      .facts { grid-template-columns: 1fr; }
+      footer { display: block; line-height: 1.7; }
+      .tag-cloud::before { left: 50%; right: auto; white-space: nowrap; transform: translateX(-50%) rotate(2deg); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap topbar">
+    <a class="stamp" href="#top"><span class="stamp-dot"></span> WZT / 个人站</a>
+    <nav aria-label="页面导航"><a href="#contact">联系</a><a href="#tags">头衔</a><a href="#about">关于</a><a href="#chaos">彩蛋</a></nav>
+  </header>
+
+  <main id="top">
+    <section class="wrap hero">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">欢迎光临 / 本人看起来比实际状态稳定</p>
+          <h1>你好，我是<br><span class="highlight">WZT，一个不太会介绍自己的人</span></h1>
+          <p class="hero-copy">照片、联系方式和头衔都放好了，免得你翻半天。本人性格不错，主要看当天有没有吃饱；聊天不用破冰，直接发“在吗”也行，我一般会先在心里回你三遍。</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#contact">联系本人，开启聊天副本 →</a>
+            <button class="btn secondary" id="scrollChaos">抽取今日精神状态</button>
+          </div>
+        </div>
+        <div class="portrait-card">
+          <div class="sticker one">本人（照片仅供参考）</div>
+          <div class="sticker two">美味但不包邮</div>
+          <div class="portrait-frame">
+            <div class="portrait">
+              <img src="profile.jpg" alt="WZT 的本人照片" loading="lazy">
+              <span class="portrait-note">证件照：本人努力自然，最后还是像在等下班</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker" aria-hidden="true"><span>今日状态：表面正常，内心已下班&nbsp;&nbsp;✦&nbsp;&nbsp;别问，问就是在想今晚吃什么&nbsp;&nbsp;✦&nbsp;&nbsp;本人暂时没有大事，主要是小事还没处理完&nbsp;&nbsp;✦&nbsp;&nbsp;今日状态：表面正常，内心已下班&nbsp;&nbsp;✦&nbsp;&nbsp;别问，问就是在想今晚吃什么&nbsp;&nbsp;✦&nbsp;&nbsp;本人暂时没有大事，主要是小事还没处理完&nbsp;&nbsp;✦&nbsp;&nbsp;</span></div>
+
+    <section class="wrap" id="tags">
+      <div class="section-head">
+        <h2>江湖头衔<br>全凭本人勇气。</h2>
+        <p>头衔都是真的，实力有时在，有时路上堵车；认证方式也很简单：本人说是就是。有什么疑问，建议先请我吃饭再复核。</p>
+      </div>
+      <div class="tag-cloud" role="list" aria-label="WZT 的个人标签">
+        <span class="tag" role="listitem">国服第一柱间</span>
+        <span class="tag" role="listitem">建德一把刀</span>
+        <span class="tag" role="listitem">最后的脏牧</span>
+        <span class="tag" role="listitem">电气最高的山</span>
+        <span class="tag" role="listitem">百鬼之主拥有者</span>
+        <span class="tag" role="listitem">最美味之人</span>
+        <span class="tag" role="listitem">红塔山皇帝</span>
+        <span class="tag" role="listitem">魔大陆另类王</span>
+      </div>
+    </section>
+
+    <section class="wrap" id="contact">
+      <div class="section-head">
+        <h2>实用入口<br>在这儿。</h2>
+        <p>微信、QQ、邮箱都在这儿，想加就加，不用先写申请。我回得慢不一定是高冷，可能是在脑内把回复改到第三稿，还没敢发出去。</p>
+      </div>
+      <div class="contact-grid">
+        <article class="contact-card">
+          <div class="card-top"><div><div class="label">微信 / wechat</div><h3>微信号</h3></div><div class="icon">💬</div></div>
+          <code id="wechat">kako_108</code>
+          <button class="copy-btn" data-copy="wechat">复制一下</button>
+        </article>
+        <article class="contact-card">
+          <div class="card-top"><div><div class="label">QQ / 古老但能打</div><h3>QQ号</h3></div><div class="icon">🐧</div></div>
+          <code id="qq">1264587470</code>
+          <button class="copy-btn" data-copy="qq">复制一下</button>
+        </article>
+        <article class="contact-card">
+          <div class="card-top"><div><div class="label">email / 正经联络处</div><h3>邮箱</h3></div><div class="icon">📮</div></div>
+          <code id="email">KAKO@email.163</code>
+          <div class="contact-actions"><button class="copy-btn" data-copy="email">复制邮箱</button><a class="copy-btn" href="mailto:KAKO@email.163">直接发邮件</a></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="wrap" id="about">
+      <div class="section-head"><h2>关于这个<br>普通人。</h2><p>本人属于看着挺正常、熟了以后也没有更正常的类型。日常爱好是想太多、吃太快，以及在“马上”和“等会儿”之间反复横跳。</p></div>
+      <div class="about-grid">
+        <p class="manifesto">我对人生的态度比较积极：遇到困难先深呼吸，遇到大困难先看看有没有人能替我。工作上积极配合，心里积极下班；对未来充满期待，期待它别来得太早。</p>
+        <div class="facts">
+          <div class="fact"><b>01 / 身份</b><span>互联网摸鱼人口，朋友圈营业时间不固定。</span></div>
+          <div class="fact"><b>02 / 特长</b><span>把简单的事想复杂，把复杂的事留给明天。</span></div>
+          <div class="fact"><b>03 / 版本</b><span>人类 v2.0；新增“打开聊天框后不知道说啥”功能。</span></div>
+          <div class="fact"><b>04 / 原则</b><span>能商量就不争，能躺着就不坐；这叫合理分配体力。</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chaos" id="chaos">
+      <div class="wrap">
+        <div class="chaos-box">
+          <div><h2>今日精神状态<br>读完别急着对号入座。</h2><p>随机抽取一条本人精神状态报告：上半句还算体面，下半句负责拆台。人生不一定有反转，但这个按钮有。</p><button class="fortune-btn" id="fortuneBtn">抽一条今日判词 →</button></div>
+          <div class="fortune" id="fortune" aria-live="polite">正在检测精神状态……检测到了，系统建议先吃饭。</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap"><span>© 2026 WZT / 本站由本人维护，更新频率随本人心情，反正你也看不出来</span><button class="secret" id="secretBtn">别点，里面是本人最后一点体面</button></footer>
+  <div class="toast" id="toast" role="status"></div>
+
+  <script>
+    const toast = document.querySelector('#toast');
+    let toastTimer;
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+    document.querySelectorAll('[data-copy]').forEach((button) => {
+      button.addEventListener('click', async () => {
+        const value = document.getElementById(button.dataset.copy).textContent.trim();
+        try { await navigator.clipboard.writeText(value); showToast(`已复制：${value}，去聊天框里贴上即可。`); }
+        catch { showToast(`请手动复制：${value}`); }
+      });
+    });
+    document.querySelector('#scrollChaos').addEventListener('click', () => document.querySelector('#chaos').scrollIntoView({ behavior: 'smooth' }));
+    const fortunes = [
+      '早睡早起我做到了，只不过是分开两天。',
+      '我对工作的热情很稳定，稳定地希望下班。',
+      '我不是在发呆，我在等脑子把刚才那句话撤回。',
+      '今天本来想省钱，后来觉得钱自己会处理好。',
+      '我对生活要求不高，能少几个临时任务就算高配。',
+      '表面上我在认真听，实际上在等关键词“散会”。',
+      '别人靠实力逆袭，我靠闹钟响了三次才坐起来。',
+      '生活偶尔给我出难题，我一般先看有没有选择题。',
+      '别人起床是迎接新一天，我起床是确认昨天结束没。',
+      '我不是路痴，我只是尊重每一条错误的路。',
+      '我不会拒绝别人，我只会在答应后开始后悔。',
+      '余额不是问题，主要是它一直在给我出题。',
+      '我有计划，计划也知道，但我们暂时不联系。',
+      '不是我想太多，是现实给的素材太丰富。',
+      '我这人特别好说话，只要你别让我说话。',
+      '最近努力保持微笑，主要是嘴角还没收到加班通知。',
+      '我不是拖延，事情只是被我放进了“等我心情好”文件夹。',
+      '想吃和减肥，我都支持；具体执行看哪个先到。',
+      '我一直在进步，至少现在知道自己哪里不行。',
+      '今天先不跟生活较劲，它看起来也挺忙的。',
+      '我对未来有信心，毕竟现在也没别的办法。',
+      '我不是内向，我只是把社交额度留给了外卖员。',
+      '你问我有什么优点？我不记仇，主要是记不住。',
+      '“马上就好”是我最诚实的谎言，毕竟没说几点。',
+      '生活把我绊倒了，我站起来后发现本来就想坐会儿。',
+      '我不是不爱运动，是我和沙发刚签了长期合同。',
+      '我有很多想法，真正说出来的都经过了三轮删减。',
+      '今天状态很好，除了精神、体力和钱包方面。',
+      '去他妈的计划表，先把饭吃了再说。',
+      '有屁快放，想法也一样，憋久了容易内伤。'
+    ];
+    document.querySelector('#fortuneBtn').addEventListener('click', () => {
+      document.querySelector('#fortune').textContent = fortunes[Math.floor(Math.random() * fortunes.length)];
+    });
+    document.querySelector('#secretBtn').addEventListener('click', () => {
+      document.body.style.setProperty('--pink', '#7cff78');
+      document.body.style.setProperty('--acid', '#ff9b4a');
+      showToast('隐藏状态已开启：表面无事发生，内心已经下班。');
+    });
+  </script>
+</body>
+</html>
