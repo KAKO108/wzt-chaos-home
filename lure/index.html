@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>玉上府 · 2–8km 小溪路亚</title>
+<link rel="canonical" href="https://wzthandsome.cn/lure/">
+<meta name="theme-color" content="#0d1b2a">
+<meta property="og:title" content="玉上府 · 2–8km 小溪路亚">
+<meta property="og:description" content="建德更楼金境玉上府周边 7 个小溪路亚点：导航、桥下怎么打、目标鱼。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://wzthandsome.cn/lure/">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root{
+    --navy:#0d1b2a; --navy2:#123b4a; --paper:#f4f7f5;
+    --green:#2e7d32; --orange:#d67a00; --gray:#6e7a8a;
+    --yellow:#ffd60a; --ink:#16202a; --muted:#7b8a96;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%;margin:0;background:var(--paper);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
+  #map{position:fixed;inset:0;z-index:0;background:#dfe8e4}
+  .top{position:fixed;left:0;right:0;top:0;z-index:20;padding:16px 16px 20px;
+    background:linear-gradient(180deg,rgba(13,27,42,.96),rgba(13,27,42,.72) 70%,rgba(13,27,42,0));
+    color:#fff;pointer-events:none}
+  .top .kicker{font-size:10px;letter-spacing:2px;color:#8fc7d8}
+  .top h1{margin:4px 0 2px;font-size:24px;line-height:1.15;letter-spacing:.5px}
+  .top p{margin:0;font-size:12px;color:#c9d8e2}
+  .top .count{position:absolute;right:16px;bottom:14px;font-size:11px;color:#c9d8e2}
+  .top .count b{font-size:20px;color:var(--yellow);margin-right:2px}
+  .top a.home-link{pointer-events:auto;position:absolute;right:16px;top:16px;font-size:11px;
+    color:#9fc9d8;text-decoration:none;border-bottom:1px dashed rgba(159,201,216,.45)}
+  .filters{position:fixed;z-index:20;top:96px;left:0;right:0;padding:0 12px;
+    display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+  .filters::-webkit-scrollbar{display:none}
+  .chip{flex:none;padding:7px 14px;border-radius:999px;background:rgba(255,255,255,.94);
+    border:1px solid #dde6ec;font-size:12px;color:#4c5a66}
+  .chip.on{background:var(--navy);border-color:var(--navy);color:#fff;font-weight:600}
+  .cards{position:fixed;z-index:20;left:0;right:0;bottom:0;padding:10px 12px calc(18px + env(safe-area-inset-bottom));
+    display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;
+    background:linear-gradient(0deg,rgba(244,247,245,.98),rgba(244,247,245,.82) 70%,rgba(244,247,245,0))}
+  .cards::-webkit-scrollbar{display:none}
+  .card{flex:none;width:250px;scroll-snap-align:start;background:#fff;border-radius:16px;
+    padding:12px 13px;box-shadow:0 8px 22px rgba(13,27,42,.14);border:1px solid #e8eef2}
+  .card .row{display:flex;justify-content:space-between;align-items:center}
+  .badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:600}
+  .badge.green{color:#1f6b2a;background:#e4f4e6}
+  .badge.orange{color:#9a5b00;background:#fff0d6}
+  .badge.gray{color:#4c5a66;background:#e9eef2}
+  .card .dist{font-size:10px;color:var(--muted)}
+  .card h3{margin:5px 0 1px;font-size:16px;line-height:1.3}
+  .card .sub{font-size:11px;color:#6c7b87;margin:0}
+  .card .meta{font-size:10px;color:#8a98a4;margin-top:5px}
+  .legend{position:fixed;z-index:15;left:12px;bottom:164px;font-size:10px;color:#33505e;
+    background:rgba(255,255,255,.88);border-radius:8px;padding:6px 9px;line-height:1.7;
+    box-shadow:0 2px 10px rgba(13,27,42,.08)}
+  .legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px}
+  .pin{width:26px;height:26px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);
+    border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center}
+  .pin span{transform:rotate(45deg);color:#fff;font-size:11px;font-weight:700;line-height:1}
+  .pin.green{background:var(--green)} .pin.orange{background:var(--orange)} .pin.gray{background:var(--gray)}
+  .pin.home{background:var(--yellow);border-radius:50%;transform:none;width:30px;height:30px}
+  .pin.home span{transform:none;color:#0d1b2a;font-size:15px}
+  .leaflet-control-attribution{font-size:9px}
+  .detail{position:fixed;inset:0;z-index:50;background:rgba(10,20,28,.42);
+    display:none;align-items:flex-end}
+  .detail.on{display:flex}
+  .sheet{width:100%;max-height:88vh;background:#fff;border-radius:20px 20px 0 0;
+    overflow:auto;padding:18px 18px calc(18px + env(safe-area-inset-bottom));
+    animation:up .22s ease}
+  @keyframes up{from{transform:translateY(30px);opacity:.4}to{transform:none;opacity:1}}
+  .sheet .grab{width:38px;height:4px;border-radius:2px;background:#dbe3e8;margin:-6px auto 12px}
+  .sheet .head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+  .sheet h2{margin:6px 0 2px;font-size:22px;line-height:1.25}
+  .sheet .meta{font-size:12px;color:var(--muted)}
+  .close{flex:none;width:30px;height:30px;border-radius:50%;background:#eef3f7;color:#4c5a66;
+    display:flex;align-items:center;justify-content:center;font-size:18px}
+  .section{margin:16px 0 6px;font-size:12px;font-weight:700;color:var(--navy);
+    padding-left:8px;border-left:3px solid var(--yellow);line-height:1.3}
+  .body{font-size:13px;line-height:1.7;color:#2b3a46}
+  .kv{display:flex;padding:6px 0;border-bottom:1px solid #f0f3f5;font-size:13px}
+  .kv:last-child{border-bottom:0}
+  .kv b{flex:none;width:52px;color:#7b8a96;font-weight:400;font-size:12px}
+  .kv span{flex:1;color:#16202a}
+  .navbtn{display:block;margin-top:18px;height:48px;line-height:48px;text-align:center;
+    border-radius:999px;background:var(--navy);color:#fff;font-size:15px;font-weight:600;text-decoration:none}
+  .note{background:#fffaf0;border:1px solid #ffe2b0;border-radius:12px;padding:10px 12px}
+  .hint{font-size:11px;color:#8a98a4;line-height:1.6;margin-top:12px}
+@media (max-width:460px){
+  .top h1{font-size:22px}
+  .top p{font-size:11px}
+  .top .count{font-size:10px}
+  .card{width:232px}
+  .legend{bottom:158px}
+}
+</style>
+</head>
+<body>
+<div id="map"></div>
+
+<div class="top">
+  <div class="kicker">建德 · 更楼 · 金境玉上府</div>
+  <h1>2–8km 小溪路亚</h1>
+  <p>以小区为圆心，专找卫星/矢量图上的小溪、桥下潭</p>
+  <a class="home-link" href="../">← 回 WZT 首页</a>
+  <div class="count"><b id="count">7</b>个点</div>
+</div>
+
+<div class="filters" id="filters"></div>
+<div class="legend">
+  <div><i style="background:#2e7d32"></i>推荐</div>
+  <div><i style="background:#d67a00"></i>可试</div>
+  <div><i style="background:#6e7a8a"></i>备选</div>
+  <div><i style="background:#ffd60a"></i>家</div>
+</div>
+<div class="cards" id="cards"></div>
+
+<div class="detail" id="detail">
+  <div class="sheet">
+    <div class="grab"></div>
+    <div class="head">
+      <div>
+        <span class="badge" id="dBadge"></span>
+        <h2 id="dTitle"></h2>
+        <div class="meta" id="dMeta"></div>
+      </div>
+      <div class="close" id="dClose">×</div>
+    </div>
+    <div id="dBody"></div>
+    <a class="navbtn" id="dNav" href="#" target="_blank" rel="noopener">导航去这里（高德）</a>
+    <div class="hint">坐标是河段示意，到现场沿溪找桥；小地名高德不一定收录，村口问「溪上那座桥」最快。</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const HOME = {name:'家 · 金境玉上府', lat:29.4367, lon:119.2637};
+const SPOTS = [
+  {id:1, short:'石口桥', name:'甘溪 · 石口段', conf:'推荐', color:'green',
+   lat:29.4240, lon:119.2859, distance:'东 2.6km', drive:'约4.1km / 6分钟',
+   navName:'石口村', coord:'119.2859,29.4240',
+   park:'村口桥头空地；看到跨溪水泥桥，桥下就是潭',
+   route:'出小区上金岭线，向南约1km，到「云明眼镜/仁汇路口」右转进更邓线；沿溪开约2.6km，看到「石口村」路牌和跨溪水泥桥，桥头停车。',
+   points:'桥下深潭（先打桥墩下游回水）→ 桥上游第一个跌水下方 → 下游50m弯道外侧',
+   tackle:'1.8–2.1m UL，1.5–2.5g 亮片逆流抛、顺流收；飞蝇钩+助投器打浅滩；桥下小铅头+软虫。',
+   fish:'马口、宽鳍鱲、溪石斑',
+   note:'村道窄，别堵路；雨后水浑改天。'},
+  {id:2, short:'甘溪村桥', name:'甘溪 · 甘溪村段', conf:'可试', color:'orange',
+   lat:29.4228, lon:119.2943, distance:'东 3.5km', drive:'约5.1km / 8分钟',
+   navName:'甘溪村', coord:'119.2943,29.4228',
+   park:'村中桥；桥边小卖部/空地，步行1分钟',
+   route:'从1号沿更邓线继续1km，到甘溪村中桥；桥边空地停车。',
+   points:'坝下冲刷坑、桥墩两侧、树荫下的深色水',
+   tackle:'2–3g 亮片、小米诺；傍晚有捕食声时换小波爬/浮水米诺。',
+   fish:'马口、白条、小斑鳜',
+   note:'村道会车难，别堵路；水浑改天。'},
+  {id:3, short:'洪宅桥', name:'邓家溪 · 洪宅段', conf:'可试', color:'orange',
+   lat:29.4140, lon:119.3030, distance:'东南 4.6km', drive:'约6km / 9分钟',
+   navName:'洪宅村', coord:'119.3030,29.4140',
+   park:'甘南线进村第一座桥；桥头空地',
+   route:'上金岭线/G320 向东，到更邓线路口后沿更邓线到石口附近，看路牌转甘南线（往过塘源/石岭村方向）；进洪宅村第一座桥。',
+   points:'洪宅桥、后川畈小坝、连续跌水之间的潭',
+   tackle:'轻量亮片、飞蝇钩；溪窄，1.5–1.8m 短竿更好。',
+   fish:'马口、溪石斑',
+   note:'不要从2号往南抄小路，实际要绕17km；部分河段在治理施工，看到围挡换点。'},
+  {id:4, short:'石岭村桥', name:'石岭溪 · 石岭村', conf:'可试', color:'orange',
+   lat:29.4081, lon:119.2899, distance:'东南 4.1km', drive:'约6.8km / 10分钟',
+   navName:'石岭村', coord:'119.2899,29.4081',
+   park:'村口桥；桥头空地',
+   route:'从洪宅桥继续沿甘南线2km，到石岭村口桥。',
+   points:'桥下潭、上游石滩、倒树边',
+   tackle:'轻量亮片、飞蝇钩；1.5–1.8m 短竿。',
+   fish:'马口、宽鳍鱲',
+   note:'部分河段可能在整治，看到围挡换点。'},
+  {id:5, short:'桐子源', name:'桐子源—新街小溪', conf:'备选', color:'gray',
+   lat:29.4000, lon:119.2500, distance:'西南 4.3km', drive:'入口需现场确认',
+   navName:'桐子源村', coord:'119.2500,29.4000',
+   park:'村道沿溪，看到桥就停',
+   route:'高德搜「桐子源村」；村道沿溪，看到桥停。入口到现场确认。',
+   points:'村桥、拦水坝、汇入寿昌江的河口',
+   tackle:'轻量亮片、飞蝇钩。',
+   fish:'马口、白条',
+   note:'坐标是卫星示意，平缓段可能淤泥/季节性断流。'},
+  {id:6, short:'石马头桥', name:'石马溪 · 石马头', conf:'备选', color:'gray',
+   lat:29.4290, lon:119.2320, distance:'西 3.2km', drive:'约4.6km / 6分钟',
+   navName:'石马头村', coord:'119.2320,29.4290',
+   park:'更石线进村，桥头',
+   route:'更石线向西到石马头村，村桥；桥头停车。',
+   points:'桥下、采石场下游1km以外',
+   tackle:'轻量亮片、飞蝇钩。',
+   fish:'马口',
+   note:'采石场/重卡多，水可能浑；不建议雨后去。'},
+  {id:7, short:'寿昌镇南', name:'南浦溪/童家溪', conf:'备选', color:'gray',
+   lat:29.3830, lon:119.2300, distance:'西南 6.8km', drive:'约20分钟+',
+   navName:'寿昌镇', coord:'119.2300,29.3830',
+   park:'先到寿昌镇问「南浦溪/童家溪」入口',
+   route:'330国道向寿昌南，沿溪进山；具体入口到寿昌镇后问路。暂不推荐，等1–4踩完再去。',
+   points:'山路桥、跌水、深潭',
+   tackle:'轻量亮片、飞蝇钩；山路注意落石。',
+   fish:'马口、溪石斑、小鳜',
+   note:'距离最远，按半天行程；部分河段可能景区/水源保护，先确认。'}
+];
+
+const map = L.map('map', {zoomControl:false, attributionControl:true}).setView([HOME.lat, HOME.lon], 13);
+L.tileLayer('https://webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}', {
+  subdomains:['1','2','3','4'], maxZoom:18, attribution:'高德卫星'
+}).addTo(map);
+
+let active = 'all';
+const markers = [];
+const icon = (s) => L.divIcon({
+  className:'', iconSize:[26,26], iconAnchor:[13,26],
+  html:`<div class="pin ${s.color}"><span>${s.id}</span></div>`
+});
+const homeIcon = L.divIcon({
+  className:'', iconSize:[30,30], iconAnchor:[15,15],
+  html:`<div class="pin home"><span>★</span></div>`
+});
+L.marker([HOME.lat, HOME.lon], {icon:homeIcon, zIndexOffset:1000})
+  .addTo(map).bindTooltip('家 · 金境玉上府', {direction:'top', offset:[0,-12]});
+
+function clearMarkers(){
+  markers.forEach(m => map.removeLayer(m));
+  markers.length = 0;
+}
+function draw(){
+  clearMarkers();
+  const list = active === 'all' ? SPOTS : SPOTS.filter(s => s.conf === active);
+  list.forEach(s => {
+    const m = L.marker([s.lat, s.lon], {icon:icon(s)}).addTo(map);
+    m.on('click', () => openDetail(s));
+    markers.push(m);
+  });
+  document.getElementById('count').textContent = list.length;
+  renderCards(list);
+}
+function renderCards(list){
+  document.getElementById('cards').innerHTML = list.map(s => `
+    <div class="card" data-id="${s.id}">
+      <div class="row"><span class="badge ${s.color}">${s.conf}</span><span class="dist">${s.distance}</span></div>
+      <h3>${s.id}. ${s.short}</h3>
+      <p class="sub">${s.name}</p>
+      <div class="meta">${s.drive} · ${s.fish}</div>
+    </div>`).join('');
+  document.querySelectorAll('.card').forEach(el => {
+    el.onclick = () => openDetail(SPOTS.find(s => s.id === +el.dataset.id));
+  });
+}
+function renderFilters(){
+  const opts = [['all','全部 7 个'],['推荐','推荐'],['可试','可试'],['备选','备选']];
+  document.getElementById('filters').innerHTML = opts.map(([k,l]) =>
+    `<div class="chip ${active===k?'on':''}" data-k="${k}">${l}</div>`).join('');
+  document.querySelectorAll('.chip').forEach(el => {
+    el.onclick = () => { active = el.dataset.k; renderFilters(); draw(); };
+  });
+}
+function openDetail(s){
+  document.getElementById('dBadge').className = 'badge ' + s.color;
+  document.getElementById('dBadge').textContent = s.conf;
+  document.getElementById('dTitle').textContent = s.name;
+  document.getElementById('dMeta').textContent = `${s.distance} · ${s.drive} · ${s.fish}`;
+  document.getElementById('dBody').innerHTML = `
+    <div class="section">导航</div>
+    <div class="kv"><b>高德搜</b><span>${s.navName}</span></div>
+    <div class="kv"><b>坐标</b><span>${s.coord}</span></div>
+    <div class="kv"><b>停车</b><span>${s.park}</span></div>
+    <div class="section">怎么走</div><div class="body">${s.route}</div>
+    <div class="section">桥下怎么打</div><div class="body">${s.points}</div>
+    <div class="section">钓法</div><div class="body">${s.tackle}</div>
+    <div class="section">目标鱼</div><div class="body">${s.fish}</div>
+    <div class="section">注意</div><div class="body note">${s.note}</div>`;
+  const url = `https://uri.amap.com/navigation?to=${s.lon},${s.lat},${encodeURIComponent(s.navName)}&mode=car&policy=1&src=yushangfu&coordinate=gaode&callnative=1`;
+  document.getElementById('dNav').href = url;
+  document.getElementById('detail').classList.add('on');
+}
+document.getElementById('dClose').onclick = () => document.getElementById('detail').classList.remove('on');
+document.getElementById('detail').onclick = (e) => {
+  if (e.target.id === 'detail') document.getElementById('detail').classList.remove('on');
+};
+renderFilters(); draw();
+function resetView(){
+  const mobile = innerWidth < 480;
+  map.setView([HOME.lat, HOME.lon], mobile ? 12 : 13, {animate:false});
+}
+resetView();
+setTimeout(() => { map.invalidateSize(); resetView(); }, 120);
+window.addEventListener('resize', () => { map.invalidateSize(); });
+</script>
+</body>
+</html>
