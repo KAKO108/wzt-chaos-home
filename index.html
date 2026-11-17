@@ -129,13 +129,6 @@
       50% { transform: translateY(-11px) rotate(calc(var(--tilt) + 2deg)); }
     }
 
-    .about-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 34px; align-items: start; }
-    .manifesto { font-size: clamp(27px, 4vw, 47px); line-height: 1.05; letter-spacing: -.05em; margin: 0; }
-    .manifesto em { background: var(--orange); font-style: normal; padding: 0 6px; }
-    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .fact { padding: 18px; border: 3px solid var(--ink); background: white; border-radius: 17px; min-height: 125px; }
-    .fact b { display: block; font-size: 29px; margin-bottom: 8px; }
-    .fact span { font-size: 13px; line-height: 1.5; }
 
 
     footer { padding: 27px 0 45px; display: flex; justify-content: space-between; gap: 20px; font-size: 12px; font-weight: 900; }
@@ -144,12 +137,11 @@
     .toast.show { transform: translate(-50%, 0); }
 
     @media (max-width: 800px) {
-      .hero-grid, .about-grid { grid-template-columns: 1fr; }
+      .hero-grid { grid-template-columns: 1fr; }
       .hero { padding-top: 40px; }
       .portrait-card { max-width: 450px; width: 88%; margin: 20px auto 0; }
       .contact-grid { grid-template-columns: 1fr; }
       .contact-card:nth-child(2), .contact-card:nth-child(3) { transform: none; }
-      .facts { margin-top: 10px; }
       .section-head { display: block; }
       .section-head p { margin-top: 14px; }
       .tag-cloud { min-height: auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px 10px; padding: 58px 14px 24px; }
@@ -159,7 +151,6 @@
       .wrap { width: min(100% - 24px, 1160px); }
       .topbar nav { gap: 9px; font-size: 10px; }
       h1 { font-size: 64px; }
-      .facts { grid-template-columns: 1fr; }
       footer { display: block; line-height: 1.7; }
       .tag-cloud::before { left: 50%; right: auto; white-space: nowrap; transform: translateX(-50%) rotate(2deg); }
     }
@@ -171,7 +162,7 @@
 <body>
   <header class="wrap topbar">
     <a class="stamp" href="#top"><span class="stamp-dot"></span> WZT / 个人站</a>
-    <nav aria-label="页面导航"><a href="/lure/">路亚</a><a href="#contact">联系</a><a href="#tags">头衔</a><a href="#about">关于</a></nav>
+    <nav aria-label="页面导航"><a href="/lure/">路亚</a><a href="#contact">联系</a><a href="#tags">头衔</a></nav>
   </header>
 
   <main id="top">
@@ -251,18 +242,7 @@
       </div>
     </section>
 
-    <section class="wrap" id="about">
-      <div class="section-head"><h2>关于这个<br>普通人。</h2><p>本人属于看着挺正常、熟了以后也没有更正常的类型。日常爱好是想太多、吃太快，以及在“马上”和“等会儿”之间反复横跳。</p></div>
-      <div class="about-grid">
-        <p class="manifesto">我对人生的态度比较积极：遇到困难先深呼吸，遇到大困难先看看有没有人能替我。工作上积极配合，心里积极下班；对未来充满期待，期待它别来得太早。</p>
-        <div class="facts">
-          <div class="fact"><b>01 / 身份</b><span>互联网摸鱼人口，朋友圈营业时间不固定。</span></div>
-          <div class="fact"><b>02 / 特长</b><span>把简单的事想复杂，把复杂的事留给明天。</span></div>
-          <div class="fact"><b>03 / 版本</b><span>人类 v2.0；新增“打开聊天框后不知道说啥”功能。</span></div>
-          <div class="fact"><b>04 / 原则</b><span>能商量就不争，能躺着就不坐；这叫合理分配体力。</span></div>
-        </div>
-      </div>
-    </section>
+
 
 
   </main>
