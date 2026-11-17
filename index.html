@@ -137,12 +137,6 @@
     .fact b { display: block; font-size: 29px; margin-bottom: 8px; }
     .fact span { font-size: 13px; line-height: 1.5; }
 
-    .chaos { background: var(--purple); border-block: 3px solid var(--ink); }
-    .chaos-box { background: var(--acid); border: 3px solid var(--ink); box-shadow: 8px 8px 0 var(--ink); border-radius: var(--radius); padding: 30px; display: grid; grid-template-columns: 1fr auto; gap: 25px; align-items: center; }
-    .chaos-box h2 { font-size: clamp(31px, 5vw, 68px); line-height: .86; letter-spacing: -.07em; margin: 0 0 13px; }
-    .chaos-box p { max-width: 620px; line-height: 1.6; margin: 0; }
-    .fortune { min-width: 190px; min-height: 105px; border: 3px solid var(--ink); background: var(--pink); border-radius: 18px; padding: 15px; font-weight: 900; display: grid; place-items: center; text-align: center; transform: rotate(2deg); }
-    .fortune-btn { margin-top: 12px; background: var(--ink); color: var(--acid); border: 0; border-radius: 999px; padding: 11px 15px; font-weight: 900; cursor: pointer; }
 
     footer { padding: 27px 0 45px; display: flex; justify-content: space-between; gap: 20px; font-size: 12px; font-weight: 900; }
     .secret { border: 0; background: transparent; cursor: pointer; text-decoration: underline; font-weight: 900; }
@@ -150,7 +144,7 @@
     .toast.show { transform: translate(-50%, 0); }
 
     @media (max-width: 800px) {
-      .hero-grid, .about-grid, .chaos-box { grid-template-columns: 1fr; }
+      .hero-grid, .about-grid { grid-template-columns: 1fr; }
       .hero { padding-top: 40px; }
       .portrait-card { max-width: 450px; width: 88%; margin: 20px auto 0; }
       .contact-grid { grid-template-columns: 1fr; }
@@ -177,7 +171,7 @@
 <body>
   <header class="wrap topbar">
     <a class="stamp" href="#top"><span class="stamp-dot"></span> WZT / 个人站</a>
-    <nav aria-label="页面导航"><a href="/lure/">路亚</a><a href="#contact">联系</a><a href="#tags">头衔</a><a href="#about">关于</a><a href="#chaos">彩蛋</a></nav>
+    <nav aria-label="页面导航"><a href="/lure/">路亚</a><a href="#contact">联系</a><a href="#tags">头衔</a><a href="#about">关于</a></nav>
   </header>
 
   <main id="top">
@@ -189,7 +183,6 @@
           <p class="hero-copy">照片、联系方式和头衔都放好了，免得你翻半天。本人性格不错，主要看当天有没有吃饱；聊天不用破冰，直接发“在吗”也行，我一般会先在心里回你三遍。</p>
           <div class="hero-actions">
             <a class="btn primary" href="#contact">联系本人，开启聊天副本 →</a>
-            <button class="btn secondary" id="scrollChaos">抽取今日精神状态</button>
           </div>
         </div>
         <div class="portrait-card">
@@ -271,14 +264,7 @@
       </div>
     </section>
 
-    <section class="chaos" id="chaos">
-      <div class="wrap">
-        <div class="chaos-box">
-          <div><h2>今日精神状态<br>读完别急着对号入座。</h2><p>随机抽取一条本人精神状态报告：上半句还算体面，下半句负责拆台。人生不一定有反转，但这个按钮有。</p><button class="fortune-btn" id="fortuneBtn">抽一条今日判词 →</button></div>
-          <div class="fortune" id="fortune" aria-live="polite">正在检测精神状态……检测到了，系统建议先吃饭。</div>
-        </div>
-      </div>
-    </section>
+
   </main>
 
   <footer class="wrap"><span>© 2026 WZT / 本站由本人维护，更新频率随本人心情，反正你也看不出来</span><button class="secret" id="secretBtn">别点，里面是本人最后一点体面</button></footer>
@@ -299,42 +285,6 @@
         try { await navigator.clipboard.writeText(value); showToast(`已复制：${value}，去聊天框里贴上即可。`); }
         catch { showToast(`请手动复制：${value}`); }
       });
-    });
-    document.querySelector('#scrollChaos').addEventListener('click', () => document.querySelector('#chaos').scrollIntoView({ behavior: 'smooth' }));
-    const fortunes = [
-      '早睡早起我做到了，只不过是分开两天。',
-      '我对工作的热情很稳定，稳定地希望下班。',
-      '我不是在发呆，我在等脑子把刚才那句话撤回。',
-      '今天本来想省钱，后来觉得钱自己会处理好。',
-      '我对生活要求不高，能少几个临时任务就算高配。',
-      '表面上我在认真听，实际上在等关键词“散会”。',
-      '别人靠实力逆袭，我靠闹钟响了三次才坐起来。',
-      '生活偶尔给我出难题，我一般先看有没有选择题。',
-      '别人起床是迎接新一天，我起床是确认昨天结束没。',
-      '我不是路痴，我只是尊重每一条错误的路。',
-      '我不会拒绝别人，我只会在答应后开始后悔。',
-      '余额不是问题，主要是它一直在给我出题。',
-      '我有计划，计划也知道，但我们暂时不联系。',
-      '不是我想太多，是现实给的素材太丰富。',
-      '我这人特别好说话，只要你别让我说话。',
-      '最近努力保持微笑，主要是嘴角还没收到加班通知。',
-      '我不是拖延，事情只是被我放进了“等我心情好”文件夹。',
-      '想吃和减肥，我都支持；具体执行看哪个先到。',
-      '我一直在进步，至少现在知道自己哪里不行。',
-      '今天先不跟生活较劲，它看起来也挺忙的。',
-      '我对未来有信心，毕竟现在也没别的办法。',
-      '我不是内向，我只是把社交额度留给了外卖员。',
-      '你问我有什么优点？我不记仇，主要是记不住。',
-      '“马上就好”是我最诚实的谎言，毕竟没说几点。',
-      '生活把我绊倒了，我站起来后发现本来就想坐会儿。',
-      '我不是不爱运动，是我和沙发刚签了长期合同。',
-      '我有很多想法，真正说出来的都经过了三轮删减。',
-      '今天状态很好，除了精神、体力和钱包方面。',
-      '去他妈的计划表，先把饭吃了再说。',
-      '有屁快放，想法也一样，憋久了容易内伤。'
-    ];
-    document.querySelector('#fortuneBtn').addEventListener('click', () => {
-      document.querySelector('#fortune').textContent = fortunes[Math.floor(Math.random() * fortunes.length)];
     });
     document.querySelector('#secretBtn').addEventListener('click', () => {
       document.body.style.setProperty('--pink', '#7cff78');
