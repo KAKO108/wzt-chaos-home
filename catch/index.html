@@ -106,13 +106,6 @@
     <section class="hero">
       <p class="kicker">建德 · 微物 · 鱼获墙</p>
       <h1><span class="highlight">鱼获墙</span></h1>
-      <p>只记自己钓的。先到了 3 种，剩下 4 种继续钓；尺寸靠目测，跑掉的不算。</p>
-      <div class="stats">
-        <div class="stat"><small>鱼种</small><b id="sUnlocked">3 / 7</b></div>
-        <div class="stat"><small>现场照片</small><b>4 张</b></div>
-        <div class="stat"><small>总尾数</small><b>没数</b></div>
-        <div class="stat"><small>最大</small><b>待测</b></div>
-      </div>
     </section>
 
     <section class="grid" id="grid" aria-label="鱼获记录"></section>
@@ -173,8 +166,6 @@ function renderGrid(){
     </article>`).join('');
 }
 
-document.getElementById('sUnlocked').textContent =
-  `${FISH.filter(f => f.status === 'unlocked').length} / ${FISH.length}`;
 renderGrid();
 </script>
 </body>
