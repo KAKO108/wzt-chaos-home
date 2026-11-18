@@ -108,8 +108,6 @@
       <h1><span class="highlight">鱼获墙</span></h1>
     </section>
 
-    <section class="grid" id="grid" aria-label="鱼获记录"></section>
-
     <section class="shots" aria-label="现场照片">
       <div class="shots-head"><h2>现场照片</h2><span>4 张 · 手机直出</span></div>
       <div class="shot-grid">
@@ -126,47 +124,5 @@
     </footer>
   </main>
 
-<script>
-const FISH = [
-  {id:1, name:'马口', status:'unlocked', color:'acid', first:true, lure:'飞蝇钩 + 1.5g 亮片',
-   note:'第一条路亚鱼。黄尾巴、身上有黑点；亮片和飞蝇钩都吃。', photo:'../assets/catch/makou-1.jpg'},
-  {id:2, name:'白条', status:'unlocked', color:'pink', lure:'飞蝇钩 + 助投器',
-   note:'一下午的混获：白条、马口、鳑鲏都有；白条抢饵最凶。', photo:'../assets/catch/baitiao-1.jpg'},
-  {id:3, name:'太阳鱼', status:'unlocked', color:'purple', lure:'1–2g 亮片 / 飞蝇钩',
-   note:'嘴小、身上有竖纹，鳍是橘红色的；贪吃，小饵都咬。', photo:'../assets/catch/taiyangyu-1.jpg'},
-  {id:4, name:'小翘嘴', status:'locked', color:'orange', lure:'2–3g 小米诺',
-   note:'目标：傍晚/夜钓，桥墩灯光边。', photo:''},
-  {id:5, name:'斑鳜', status:'locked', color:'green', lure:'小铅头 + 软虫贴底',
-   note:'目标：结构区，慢收跳底。', photo:''},
-  {id:6, name:'溪石斑', status:'locked', color:'gray', lure:'1–2g 亮片 / 飞蝇钩',
-   note:'目标：清水石缝，动作要轻。', photo:''},
-  {id:7, name:'宽鳍鱲', status:'locked', color:'green', lure:'1–2g 亮片 / 飞蝇钩',
-   note:'目标：急滩、清水石底；颜色比马口花。', photo:''}
-];
-
-const fishSvg = `<svg viewBox="0 0 240 120" aria-hidden="true">
-  <path d="M28 60 C60 22 150 18 192 60 C150 102 60 98 28 60Z" fill="currentColor"/>
-  <path d="M192 60 L228 34 L220 60 L228 86 Z" fill="currentColor"/>
-  <circle cx="62" cy="52" r="4.5" fill="#fff"/>
-  <path d="M100 32 C112 18 132 18 144 30" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".85"/>
-  <path d="M112 88 C124 100 142 100 152 90" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".55"/>
-</svg>`;
-
-function renderGrid(){
-  const grid = document.getElementById('grid');
-  grid.innerHTML = FISH.map((f, i) => `
-    <article class="card ${f.status}">
-      <div class="art ${f.color}">${f.first ? '<span class="ribbon">第一条路亚</span>' : ''}${f.photo ? `<img src="${f.photo}" alt="${f.name}" loading="lazy">` : fishSvg}</div>
-      <div class="card-body">
-        <div class="row"><span class="no">#${String(f.id).padStart(2,'0')}</span></div>
-        <h3>${f.name}</h3>
-        <div class="kv"><b>饵</b>${f.lure}</div>
-        <div class="note">${f.note}</div>
-      </div>
-    </article>`).join('');
-}
-
-renderGrid();
-</script>
 </body>
 </html>
