@@ -7,7 +7,7 @@
 <link rel="canonical" href="https://wzthandsome.cn/catch/">
 <meta name="theme-color" content="#111111">
 <meta property="og:title" content="鱼获墙 · WZT/kako108">
-<meta property="og:description" content="只记自己钓的。马口、白条、太阳鱼已解锁，剩下 4 种继续钓。照片在场，空军不记。">
+<meta property="og:description" content="只记自己钓的。马口、白条、太阳鱼已记录，剩下 4 种继续钓。照片在场，空军不记。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://wzthandsome.cn/catch/">
 <style>
@@ -47,6 +47,7 @@
   .card{border:var(--line);background:#fff;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
   .art{height:200px;display:grid;place-items:center;border-bottom:var(--line);position:relative;overflow:hidden}
   .art svg{width:78%;height:auto;display:block}
+  .ribbon{position:absolute;left:10px;top:10px;z-index:2;background:var(--ink);color:var(--acid);font-size:10px;font-weight:900;padding:4px 8px;border:2px solid var(--ink);transform:rotate(-3deg)}
   .art img{width:100%;height:100%;object-fit:cover;object-position:center 42%;display:block}
   .art.acid{background:var(--acid);color:var(--ink)}
   .art.pink{background:var(--pink);color:var(--ink)}
@@ -57,7 +58,7 @@
   .card.locked{box-shadow:5px 5px 0 #b9b5aa}
   .card.locked .art{filter:grayscale(.55);opacity:.72}
   .card-body{padding:14px 15px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
-  .row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .row{display:flex;justify-content:flex-end;align-items:center;gap:8px}
   .badge{font-size:10px;font-weight:900;padding:3px 9px;border:2px solid var(--ink);border-radius:999px;background:var(--acid)}
   .badge.locked{background:#ece9df;color:#6f6b61}
   .no{font-size:10px;color:var(--muted);font-weight:900;letter-spacing:.1em}
@@ -107,23 +108,22 @@
       <h1><span class="highlight">鱼获墙</span></h1>
       <p>只记自己钓的。先到了 3 种，剩下 4 种继续钓；尺寸靠目测，跑掉的不算。</p>
       <div class="stats">
-        <div class="stat"><small>已解锁</small><b id="sUnlocked">2 / 6</b></div>
-        <div class="stat"><small>鱼获记录</small><b id="sSpecies">3 种</b></div>
+        <div class="stat"><small>鱼种</small><b id="sUnlocked">3 / 7</b></div>
+        <div class="stat"><small>现场照片</small><b>4 张</b></div>
         <div class="stat"><small>总尾数</small><b>没数</b></div>
         <div class="stat"><small>最大</small><b>待测</b></div>
       </div>
     </section>
 
-    <div class="filters" id="filters"></div>
     <section class="grid" id="grid" aria-label="鱼获记录"></section>
 
     <section class="shots" aria-label="现场照片">
       <div class="shots-head"><h2>现场照片</h2><span>4 张 · 手机直出</span></div>
       <div class="shot-grid">
-        <figure class="shot"><img src="../assets/catch/baitiao-1.jpg" alt="白条" loading="lazy"><figcaption>白条：一盒，数不过来</figcaption></figure>
+        <figure class="shot"><img src="../assets/catch/baitiao-1.jpg" alt="白条" loading="lazy"><figcaption>白条 / 马口 / 鳑鲏：一下午的混获</figcaption></figure>
         <figure class="shot"><img src="../assets/catch/taiyangyu-1.jpg" alt="太阳鱼" loading="lazy"><figcaption>太阳鱼：发色了</figcaption></figure>
         <figure class="shot"><img src="../assets/catch/makou-2.jpg" alt="马口" loading="lazy"><figcaption>马口：塑料袋也挡不住黄尾巴</figcaption></figure>
-        <figure class="shot"><img src="../assets/catch/makou-1.jpg" alt="马口" loading="lazy"><figcaption>马口：这条拍得比较体面</figcaption></figure>
+        <figure class="shot"><img src="../assets/catch/makou-1.jpg" alt="马口" loading="lazy"><figcaption>马口：我的第一条路亚鱼</figcaption></figure>
       </div>
     </section>
 
@@ -135,10 +135,10 @@
 
 <script>
 const FISH = [
-  {id:1, name:'马口', status:'unlocked', color:'acid', lure:'飞蝇钩 + 1.5g 亮片',
-   note:'黄尾巴、身上有黑点；亮片和飞蝇钩都吃，最大一掌左右。', photo:'../assets/catch/makou-1.jpg'},
+  {id:1, name:'马口', status:'unlocked', color:'acid', first:true, lure:'飞蝇钩 + 1.5g 亮片',
+   note:'第一条路亚鱼。黄尾巴、身上有黑点；亮片和飞蝇钩都吃。', photo:'../assets/catch/makou-1.jpg'},
   {id:2, name:'白条', status:'unlocked', color:'pink', lure:'飞蝇钩 + 助投器',
-   note:'一盒都是；抢饵凶，飞蝇钩能连竿，适合练手。', photo:'../assets/catch/baitiao-1.jpg'},
+   note:'一下午的混获：白条、马口、鳑鲏都有；白条抢饵最凶。', photo:'../assets/catch/baitiao-1.jpg'},
   {id:3, name:'太阳鱼', status:'unlocked', color:'purple', lure:'1–2g 亮片 / 飞蝇钩',
    note:'嘴小、身上有竖纹，鳍是橘红色的；贪吃，小饵都咬。', photo:'../assets/catch/taiyangyu-1.jpg'},
   {id:4, name:'小翘嘴', status:'locked', color:'orange', lure:'2–3g 小米诺',
@@ -159,30 +159,13 @@ const fishSvg = `<svg viewBox="0 0 240 120" aria-hidden="true">
   <path d="M112 88 C124 100 142 100 152 90" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".55"/>
 </svg>`;
 
-let active = 'all';
-
-function renderFilters(){
-  const unlocked = FISH.filter(f => f.status === 'unlocked').length;
-  const opts = [['all',`全部 ${FISH.length}`],['unlocked',`已解锁 ${unlocked}`],['locked',`待解锁 ${FISH.length-unlocked}`]];
-  document.getElementById('filters').innerHTML = opts.map(([k,l]) =>
-    `<button class="chip ${active===k?'on':''}" data-k="${k}">${l}</button>`).join('');
-  document.querySelectorAll('.chip').forEach(el => {
-    el.onclick = () => { active = el.dataset.k; renderFilters(); renderGrid(); };
-  });
-}
-
 function renderGrid(){
-  const list = active === 'all' ? FISH : FISH.filter(f => f.status === active);
   const grid = document.getElementById('grid');
-  if(!list.length){ grid.innerHTML = '<div class="empty">这里还没有鱼。换个筛子试试。</div>'; return; }
-  grid.innerHTML = list.map((f, i) => `
+  grid.innerHTML = FISH.map((f, i) => `
     <article class="card ${f.status}">
-      <div class="art ${f.color}">${f.photo ? `<img src="${f.photo}" alt="${f.name}" loading="lazy">` : fishSvg}</div>
+      <div class="art ${f.color}">${f.first ? '<span class="ribbon">第一条路亚</span>' : ''}${f.photo ? `<img src="${f.photo}" alt="${f.name}" loading="lazy">` : fishSvg}</div>
       <div class="card-body">
-        <div class="row">
-          <span class="badge ${f.status === 'locked' ? 'locked' : ''}">${f.status === 'locked' ? '待解锁' : '已解锁'}</span>
-          <span class="no">#${String(f.id).padStart(2,'0')}</span>
-        </div>
+        <div class="row"><span class="no">#${String(f.id).padStart(2,'0')}</span></div>
         <h3>${f.name}</h3>
         <div class="kv"><b>饵</b>${f.lure}</div>
         <div class="note">${f.note}</div>
@@ -192,9 +175,6 @@ function renderGrid(){
 
 document.getElementById('sUnlocked').textContent =
   `${FISH.filter(f => f.status === 'unlocked').length} / ${FISH.length}`;
-document.getElementById('sSpecies').textContent =
-  `${FISH.filter(f => f.status === 'unlocked').length} 种`;
-renderFilters();
 renderGrid();
 </script>
 </body>
