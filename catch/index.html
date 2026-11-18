@@ -7,7 +7,7 @@
 <link rel="canonical" href="https://wzthandsome.cn/catch/">
 <meta name="theme-color" content="#111111">
 <meta property="og:title" content="鱼获墙 · WZT/kako108">
-<meta property="og:description" content="只记自己钓的。马口、白条、宽鳍鱲已解锁，剩下 3 种继续钓。照片在场，空军不记。">
+<meta property="og:description" content="只记自己钓的。马口、白条、太阳鱼已解锁，剩下 4 种继续钓。照片在场，空军不记。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://wzthandsome.cn/catch/">
 <style>
@@ -105,7 +105,7 @@
     <section class="hero">
       <p class="kicker">建德 · 微物 · 鱼获墙</p>
       <h1><span class="highlight">鱼获墙</span></h1>
-      <p>只记自己钓的。先到了 3 种，剩下 3 种继续钓；尺寸靠目测，跑掉的不算。</p>
+      <p>只记自己钓的。先到了 3 种，剩下 4 种继续钓；尺寸靠目测，跑掉的不算。</p>
       <div class="stats">
         <div class="stat"><small>已解锁</small><b id="sUnlocked">2 / 6</b></div>
         <div class="stat"><small>鱼获记录</small><b id="sSpecies">3 种</b></div>
@@ -121,7 +121,7 @@
       <div class="shots-head"><h2>现场照片</h2><span>4 张 · 手机直出</span></div>
       <div class="shot-grid">
         <figure class="shot"><img src="../assets/catch/baitiao-1.jpg" alt="白条" loading="lazy"><figcaption>白条：一盒，数不过来</figcaption></figure>
-        <figure class="shot"><img src="../assets/catch/kuanqilie-1.jpg" alt="宽鳍鱲" loading="lazy"><figcaption>宽鳍鱲：发色了</figcaption></figure>
+        <figure class="shot"><img src="../assets/catch/taiyangyu-1.jpg" alt="太阳鱼" loading="lazy"><figcaption>太阳鱼：发色了</figcaption></figure>
         <figure class="shot"><img src="../assets/catch/makou-2.jpg" alt="马口" loading="lazy"><figcaption>马口：塑料袋也挡不住黄尾巴</figcaption></figure>
         <figure class="shot"><img src="../assets/catch/makou-1.jpg" alt="马口" loading="lazy"><figcaption>马口：这条拍得比较体面</figcaption></figure>
       </div>
@@ -139,14 +139,16 @@ const FISH = [
    note:'黄尾巴、身上有黑点；亮片和飞蝇钩都吃，最大一掌左右。', photo:'../assets/catch/makou-1.jpg'},
   {id:2, name:'白条', status:'unlocked', color:'pink', lure:'飞蝇钩 + 助投器',
    note:'一盒都是；抢饵凶，飞蝇钩能连竿，适合练手。', photo:'../assets/catch/baitiao-1.jpg'},
-  {id:3, name:'宽鳍鱲', status:'unlocked', color:'purple', lure:'1–2g 亮片 / 飞蝇钩',
-   note:'发色时鳍是橘红的，比马口花；清水急滩里找。', photo:'../assets/catch/kuanqilie-1.jpg'},
+  {id:3, name:'太阳鱼', status:'unlocked', color:'purple', lure:'1–2g 亮片 / 飞蝇钩',
+   note:'嘴小、身上有竖纹，鳍是橘红色的；贪吃，小饵都咬。', photo:'../assets/catch/taiyangyu-1.jpg'},
   {id:4, name:'小翘嘴', status:'locked', color:'orange', lure:'2–3g 小米诺',
    note:'目标：傍晚/夜钓，桥墩灯光边。', photo:''},
   {id:5, name:'斑鳜', status:'locked', color:'green', lure:'小铅头 + 软虫贴底',
    note:'目标：结构区，慢收跳底。', photo:''},
   {id:6, name:'溪石斑', status:'locked', color:'gray', lure:'1–2g 亮片 / 飞蝇钩',
-   note:'目标：清水石缝，动作要轻。', photo:''}
+   note:'目标：清水石缝，动作要轻。', photo:''},
+  {id:7, name:'宽鳍鱲', status:'locked', color:'green', lure:'1–2g 亮片 / 飞蝇钩',
+   note:'目标：急滩、清水石底；颜色比马口花。', photo:''}
 ];
 
 const fishSvg = `<svg viewBox="0 0 240 120" aria-hidden="true">
