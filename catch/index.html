@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>鱼获墙 · WZT/kako108</title>
+<link rel="canonical" href="https://wzthandsome.cn/catch/">
+<meta name="theme-color" content="#111111">
+<meta property="og:title" content="鱼获墙 · WZT/kako108">
+<meta property="og:description" content="只记自己钓的。马口、白条、宽鳍鱲已解锁，剩下 3 种继续钓。照片在场，空军不记。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://wzthandsome.cn/catch/">
+<style>
+  :root{
+    --ink:#111; --paper:#f4f1e8; --acid:#c8ff3d; --pink:#ff6bb5;
+    --purple:#8b5cf6; --orange:#ff9f1c; --green:#2e7d32; --muted:#6c6a63;
+    --line:3px solid var(--ink); --shadow:8px 8px 0 var(--ink);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
+  body{padding:0 0 40px}
+  a{color:inherit}
+  .wrap{width:min(100% - 36px,1120px);margin:0 auto}
+  .topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;font-size:12px;font-weight:900}
+  .stamp{display:inline-flex;align-items:center;gap:8px;text-decoration:none;letter-spacing:.04em}
+  .stamp-dot{width:11px;height:11px;background:var(--pink);border:2px solid var(--ink);transform:rotate(45deg)}
+  nav{display:flex;gap:14px;flex-wrap:wrap}
+  nav a{text-decoration:none;border-bottom:2px solid transparent}
+  nav a:hover{border-bottom-color:var(--ink)}
+  .hero{padding:54px 0 30px;border-top:var(--line)}
+  .kicker{font-size:11px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;margin:0 0 12px;color:#4b4a44}
+  h1{margin:0;font-size:clamp(58px,12vw,126px);line-height:.8;letter-spacing:-.08em}
+  h1 .highlight{display:inline-block;background:var(--acid);padding:0 12px 8px 8px;transform:rotate(-2deg);box-shadow:8px 8px 0 var(--purple)}
+  .hero p{max-width:620px;font-size:16px;line-height:1.7;margin:24px 0 0}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:var(--line);border-bottom:var(--line);margin:30px 0 24px}
+  .stat{padding:16px 14px;border-right:var(--line)}
+  .stat:last-child{border-right:0}
+  .stat small{display:block;font-size:10px;font-weight:900;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+  .stat b{display:block;font-size:clamp(28px,4vw,44px);line-height:1.05;margin-top:6px;letter-spacing:-.04em}
+  .filters{display:flex;gap:8px;overflow-x:auto;padding:0 0 20px;scrollbar-width:none}
+  .filters::-webkit-scrollbar{display:none}
+  .chip{flex:none;padding:8px 15px;border:3px solid var(--ink);border-radius:999px;background:#fff;
+    font-size:12px;font-weight:900;cursor:pointer;box-shadow:3px 3px 0 var(--ink)}
+  .chip.on{background:var(--ink);color:var(--acid)}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding-bottom:26px}
+  .card{border:var(--line);background:#fff;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
+  .art{height:200px;display:grid;place-items:center;border-bottom:var(--line);position:relative;overflow:hidden}
+  .art svg{width:78%;height:auto;display:block}
+  .art img{width:100%;height:100%;object-fit:cover;object-position:center 42%;display:block}
+  .art.acid{background:var(--acid);color:var(--ink)}
+  .art.pink{background:var(--pink);color:var(--ink)}
+  .art.purple{background:var(--purple);color:#fff}
+  .art.orange{background:var(--orange);color:var(--ink)}
+  .art.green{background:#b7e4bd;color:var(--ink)}
+  .art.gray{background:#dfe4e8;color:#66727d}
+  .card.locked{box-shadow:5px 5px 0 #b9b5aa}
+  .card.locked .art{filter:grayscale(.55);opacity:.72}
+  .card-body{padding:14px 15px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .badge{font-size:10px;font-weight:900;padding:3px 9px;border:2px solid var(--ink);border-radius:999px;background:var(--acid)}
+  .badge.locked{background:#ece9df;color:#6f6b61}
+  .no{font-size:10px;color:var(--muted);font-weight:900;letter-spacing:.1em}
+  .card h3{margin:2px 0 0;font-size:27px;line-height:1;letter-spacing:-.04em}
+  .kv{font-size:12px;line-height:1.55;color:#3f3d38}
+  .kv b{display:inline-block;min-width:42px;color:var(--muted);font-weight:900;font-size:10px;letter-spacing:.08em}
+  .note{font-size:12px;line-height:1.6;color:#4d4a43;border-top:2px dashed #d8d3c6;padding-top:9px;margin-top:auto}
+  .empty{grid-column:1/-1;border:3px dashed #bdb7a8;padding:28px;text-align:center;font-weight:900;color:#6b675c;background:#faf8f1}
+  .shots{margin:30px 0 34px;border-top:var(--line);padding-top:22px}
+  .shots-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:13px}
+  .shots-head h2{margin:0;font-size:clamp(26px,4vw,40px);letter-spacing:-.05em}
+  .shots-head span{font-size:10px;font-weight:900;letter-spacing:.1em;color:var(--muted)}
+  .shot-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .shot{margin:0;border:3px solid var(--ink);background:#fff;box-shadow:5px 5px 0 var(--ink)}
+  .shot img{display:block;width:100%;height:230px;object-fit:cover;object-position:center 42%;border-bottom:2px solid var(--ink)}
+  .shot figcaption{padding:8px 9px;font-size:11px;font-weight:900;line-height:1.45}
+  .foot{display:flex;justify-content:space-between;gap:16px;border-top:var(--line);padding-top:16px;font-size:11px;font-weight:900;color:#4b4a44}
+  .foot a{text-decoration:none;border-bottom:2px solid var(--ink)}
+  @media (max-width:820px){
+    .grid{grid-template-columns:1fr 1fr}
+    .shot-grid{grid-template-columns:1fr 1fr}
+    .shot img{height:210px}
+    .stats{grid-template-columns:1fr 1fr}
+    .stat:nth-child(2){border-right:0}
+    .stat:nth-child(1),.stat:nth-child(2){border-bottom:var(--line)}
+  }
+  @media (max-width:520px){
+    .wrap{width:min(100% - 24px,1120px)}
+    .topbar{font-size:10px}
+    nav{gap:9px}
+    h1{font-size:64px}
+    .grid{grid-template-columns:1fr}
+    .hero p{font-size:14px}
+    .foot{display:block;line-height:1.8}
+  }
+</style>
+</head>
+<body>
+  <header class="wrap topbar">
+    <a class="stamp" href="../"><span class="stamp-dot"></span> WZT/kako108</a>
+    <nav aria-label="页面导航"><a href="../">首页</a><a href="../lure/">路亚</a><a href="../#contact">联系</a></nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <p class="kicker">建德 · 微物 · 鱼获墙</p>
+      <h1><span class="highlight">鱼获墙</span></h1>
+      <p>只记自己钓的。先到了 3 种，剩下 3 种继续钓；尺寸靠目测，跑掉的不算。</p>
+      <div class="stats">
+        <div class="stat"><small>已解锁</small><b id="sUnlocked">2 / 6</b></div>
+        <div class="stat"><small>鱼获记录</small><b id="sSpecies">3 种</b></div>
+        <div class="stat"><small>总尾数</small><b>没数</b></div>
+        <div class="stat"><small>最大</small><b>待测</b></div>
+      </div>
+    </section>
+
+    <div class="filters" id="filters"></div>
+    <section class="grid" id="grid" aria-label="鱼获记录"></section>
+
+    <section class="shots" aria-label="现场照片">
+      <div class="shots-head"><h2>现场照片</h2><span>4 张 · 手机直出</span></div>
+      <div class="shot-grid">
+        <figure class="shot"><img src="../assets/catch/baitiao-1.jpg" alt="白条" loading="lazy"><figcaption>白条：一盒，数不过来</figcaption></figure>
+        <figure class="shot"><img src="../assets/catch/kuanqilie-1.jpg" alt="宽鳍鱲" loading="lazy"><figcaption>宽鳍鱲：发色了</figcaption></figure>
+        <figure class="shot"><img src="../assets/catch/makou-2.jpg" alt="马口" loading="lazy"><figcaption>马口：塑料袋也挡不住黄尾巴</figcaption></figure>
+        <figure class="shot"><img src="../assets/catch/makou-1.jpg" alt="马口" loading="lazy"><figcaption>马口：这条拍得比较体面</figcaption></figure>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <span>© 2026 WZT/kako108 · 鱼获墙 · 照片陆续补</span>
+      <a href="../">← 回首页</a>
+    </footer>
+  </main>
+
+<script>
+const FISH = [
+  {id:1, name:'马口', status:'unlocked', color:'acid', lure:'飞蝇钩 + 1.5g 亮片',
+   note:'黄尾巴、身上有黑点；亮片和飞蝇钩都吃，最大一掌左右。', photo:'../assets/catch/makou-1.jpg'},
+  {id:2, name:'白条', status:'unlocked', color:'pink', lure:'飞蝇钩 + 助投器',
+   note:'一盒都是；抢饵凶，飞蝇钩能连竿，适合练手。', photo:'../assets/catch/baitiao-1.jpg'},
+  {id:3, name:'宽鳍鱲', status:'unlocked', color:'purple', lure:'1–2g 亮片 / 飞蝇钩',
+   note:'发色时鳍是橘红的，比马口花；清水急滩里找。', photo:'../assets/catch/kuanqilie-1.jpg'},
+  {id:4, name:'小翘嘴', status:'locked', color:'orange', lure:'2–3g 小米诺',
+   note:'目标：傍晚/夜钓，桥墩灯光边。', photo:''},
+  {id:5, name:'斑鳜', status:'locked', color:'green', lure:'小铅头 + 软虫贴底',
+   note:'目标：结构区，慢收跳底。', photo:''},
+  {id:6, name:'溪石斑', status:'locked', color:'gray', lure:'1–2g 亮片 / 飞蝇钩',
+   note:'目标：清水石缝，动作要轻。', photo:''}
+];
+
+const fishSvg = `<svg viewBox="0 0 240 120" aria-hidden="true">
+  <path d="M28 60 C60 22 150 18 192 60 C150 102 60 98 28 60Z" fill="currentColor"/>
+  <path d="M192 60 L228 34 L220 60 L228 86 Z" fill="currentColor"/>
+  <circle cx="62" cy="52" r="4.5" fill="#fff"/>
+  <path d="M100 32 C112 18 132 18 144 30" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".85"/>
+  <path d="M112 88 C124 100 142 100 152 90" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".55"/>
+</svg>`;
+
+let active = 'all';
+
+function renderFilters(){
+  const unlocked = FISH.filter(f => f.status === 'unlocked').length;
+  const opts = [['all',`全部 ${FISH.length}`],['unlocked',`已解锁 ${unlocked}`],['locked',`待解锁 ${FISH.length-unlocked}`]];
+  document.getElementById('filters').innerHTML = opts.map(([k,l]) =>
+    `<button class="chip ${active===k?'on':''}" data-k="${k}">${l}</button>`).join('');
+  document.querySelectorAll('.chip').forEach(el => {
+    el.onclick = () => { active = el.dataset.k; renderFilters(); renderGrid(); };
+  });
+}
+
+function renderGrid(){
+  const list = active === 'all' ? FISH : FISH.filter(f => f.status === active);
+  const grid = document.getElementById('grid');
+  if(!list.length){ grid.innerHTML = '<div class="empty">这里还没有鱼。换个筛子试试。</div>'; return; }
+  grid.innerHTML = list.map((f, i) => `
+    <article class="card ${f.status}">
+      <div class="art ${f.color}">${f.photo ? `<img src="${f.photo}" alt="${f.name}" loading="lazy">` : fishSvg}</div>
+      <div class="card-body">
+        <div class="row">
+          <span class="badge ${f.status === 'locked' ? 'locked' : ''}">${f.status === 'locked' ? '待解锁' : '已解锁'}</span>
+          <span class="no">#${String(f.id).padStart(2,'0')}</span>
+        </div>
+        <h3>${f.name}</h3>
+        <div class="kv"><b>饵</b>${f.lure}</div>
+        <div class="note">${f.note}</div>
+      </div>
+    </article>`).join('');
+}
+
+document.getElementById('sUnlocked').textContent =
+  `${FISH.filter(f => f.status === 'unlocked').length} / ${FISH.length}`;
+document.getElementById('sSpecies').textContent =
+  `${FISH.filter(f => f.status === 'unlocked').length} 种`;
+renderFilters();
+renderGrid();
+</script>
+</body>
+</html>
