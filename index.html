@@ -59,6 +59,7 @@
     h1 { font-size: clamp(58px, 10vw, 132px); line-height: .82; letter-spacing: -.09em; margin: 0 0 28px; max-width: 780px; }
     h1 .highlight { display: inline-block; background: var(--acid); padding: 0 13px 7px 7px; transform: rotate(-2deg); box-shadow: 8px 8px 0 var(--purple); }
     .hero-copy { max-width: 560px; font-size: 18px; line-height: 1.7; margin: 0 0 26px; }
+    .hero-copy.story { max-width: 640px; font-size: 15px; line-height: 1.85; text-align: justify; }
     .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
     .btn { border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); padding: 12px 17px; border-radius: 999px; font-weight: 900; cursor: pointer; transition: transform .15s, box-shadow .15s; }
     .btn:hover { transform: translate(2px, 2px) rotate(-1deg); box-shadow: 2px 2px 0 var(--ink); }
@@ -179,6 +180,7 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
     }
+    @media (max-width: 820px) { .hero-copy.story { font-size: 14px; line-height: 1.8; } }
   </style>
 </head>
 <body>
@@ -193,7 +195,7 @@
         <div>
           <p class="eyebrow">太帅了OMG</p>
           <h1><span class="highlight">别看湿了</span></h1>
-          <p class="hero-copy">照片、联系方式和头衔都放这了，免得你翻半天。本人平时看着像个人，熟了以后也像个熟人；聊天不用破冰，直接发「在吗」就行，我一般会先在心里回你三遍，然后忘了打字。</p>
+          <p class="hero-copy story">一个富翁即将去世，临死前他把自己的三个儿子叫到自己房间，说：我给你们一人一金币，谁能把这个房间填满，我就把遗产留给谁。大儿子买了一大堆稻草，只堆了半个房间。二儿子买了一包面粉，撒出去之后只填满了房间的下半部分。小儿子拿来一张 WZT 的照片（就是下面这张），帅得满屋都是。</p>
           <div class="hero-actions">
             <a class="btn primary" href="#contact">联系本人（非诚也可）→</a>
           </div>
@@ -204,7 +206,6 @@
           <div class="portrait-frame">
             <div class="portrait">
               <img src="profile.jpg" alt="WZT 的本人照片（已尽量像人）" loading="lazy">
-              <span class="portrait-note">证件照：已尽力伪装成有精神的人，失败了</span>
             </div>
           </div>
         </div>
