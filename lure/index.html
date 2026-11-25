@@ -7,7 +7,7 @@
 <link rel="canonical" href="https://wzthandsome.cn/lure/">
 <meta name="theme-color" content="#0d1b2a">
 <meta property="og:title" content="玉上府 · 微物/远投路亚地图">
-<meta property="og:description" content="建德更楼 + 新安江 + 寿昌的 24 个微物/远投路亚点：导航、桥下怎么打、目标鱼。鱼不保证有，空军不负责。">
+<meta property="og:description" content="建德更楼 + 新安江 + 寿昌的 23 个微物/远投路亚点：导航、桥下怎么打、目标鱼。鱼不保证有，空军不负责。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://wzthandsome.cn/lure/">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
@@ -102,9 +102,9 @@
 <div class="top">
   <div class="kicker">建德 · 更楼 · 金境玉上府</div>
   <h1>微物 / 远投 路亚地图</h1>
-  <p>小溪 + 寿昌江 + 新安江 + 大洲溪，24 个下河点（微物 9 / 远投 15）。</p>
+  <p>小溪 + 寿昌江 + 新安江 + 大洲溪，23 个下河点（微物 9 / 远投 14）。</p>
   <a class="home-link" href="../">← 回 WZT 首页</a>
-  <div class="count"><b id="count">18</b>个点</div>
+  <div class="count"><b id="count">23</b>个点</div>
 </div>
 
 <div class="filters" id="filters"></div>
@@ -344,20 +344,10 @@ const SPOTS = [
    points:'桥下深潭 → 镇区河湾外侧 → 下游堰坝尾水。',
    tackle:'2.4–2.7m M，10–18g 米诺/铁板；桥下和弯道外侧远投。',
    fish:'翘嘴、赤眼、马口',
-   note:'镇区人多，注意身后；部分河段有承包/养殖，先问。'},
-  {id:24, mode:'远投', region:'寿昌', kind:'主河', short:'南浦溪汇口', name:'寿昌江 · 南浦溪/童家溪汇口', conf:'可试', color:'orange',
-   lat:29.3900, lon:119.2240, distance:'西南 13km', drive:'约15km / 24分钟',
-   navName:'寿昌镇南', coord:'119.2240,29.3900',
-   park:'330国道/河南里村口空地；沿溪找下河路',
-   route:'导航「寿昌镇南」或「河南里村」，沿330国道到汇口，找桥/下河土路。',
-   points:'支流汇口 → 沙洲外侧 → 主河缓流带。',
-   tackle:'2.7m M，10–15g 米诺/铁板；汇口打远近交界。',
-   fish:'马口、翘嘴、赤眼',
-   note:'河段示意；山区雨后水涨快，别站沙洲中间。'}
-
+   note:'镇区人多，注意身后；部分河段有承包/养殖，先问。'}
 ];
 
-const map = L.map('map', {zoomControl:false, attributionControl:true}).setView([HOME.lat, HOME.lon], 13);
+const map = L.map('map', {zoomControl:false, attributionControl:true}).setView([29.455, 119.290], 11);
 L.tileLayer('https://webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}', {
   subdomains:['1','2','3','4'], maxZoom:18, attribution:'高德卫星'
 }).addTo(map);
@@ -392,6 +382,7 @@ function draw(){
   });
   document.getElementById('count').textContent = list.length;
   renderCards(list);
+  map.invalidateSize();
   fitTo(list);
 }
 function fitTo(list){
@@ -413,7 +404,7 @@ function renderCards(list){
   });
 }
 function renderFilters(){
-  const opts = [['all','全部 24'],['微物','微物'],['远投','远投'],['更楼','更楼'],['新安江','新安江'],['寿昌','寿昌']];
+  const opts = [['all','全部 23'],['微物','微物'],['远投','远投'],['更楼','更楼'],['新安江','新安江'],['寿昌','寿昌']];
   document.getElementById('filters').innerHTML = opts.map(([k,l]) =>
     `<div class="chip ${active===k?'on':''}" data-k="${k}">${l}</div>`).join('');
   document.querySelectorAll('.chip').forEach(el => {
@@ -444,6 +435,7 @@ document.getElementById('detail').onclick = (e) => {
   if (e.target.id === 'detail') document.getElementById('detail').classList.remove('on');
 };
 renderFilters(); draw();
+setTimeout(() => { map.invalidateSize(); fitTo(SPOTS); }, 350);
 function resetView(){
   active = 'all';
   renderFilters();
