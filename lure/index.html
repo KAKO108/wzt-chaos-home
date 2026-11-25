@@ -7,7 +7,7 @@
 <link rel="canonical" href="https://wzthandsome.cn/lure/">
 <meta name="theme-color" content="#0d1b2a">
 <meta property="og:title" content="玉上府 · 微物/远投路亚地图">
-<meta property="og:description" content="建德更楼 + 新安江 + 寿昌的 23 个微物/远投路亚点：导航、桥下怎么打、目标鱼。鱼不保证有，空军不负责。">
+<meta property="og:description" content="建德更楼 + 新安江 + 寿昌的 14 个微物/远投路亚点：导航、桥下怎么打、目标鱼。鱼不保证有，空军不负责。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://wzthandsome.cn/lure/">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
@@ -102,9 +102,9 @@
 <div class="top">
   <div class="kicker">建德 · 更楼 · 金境玉上府</div>
   <h1>微物 / 远投 路亚地图</h1>
-  <p>小溪 + 寿昌江 + 新安江 + 大洲溪，23 个下河点（微物 9 / 远投 14）。</p>
+  <p>小溪 + 寿昌江 + 新安江 + 大洲溪，14 个下河点（微物 5 / 远投 9）。</p>
   <a class="home-link" href="../">← 回 WZT 首页</a>
-  <div class="count"><b id="count">23</b>个点</div>
+  <div class="count"><b id="count">14</b>个点</div>
 </div>
 
 <div class="filters" id="filters"></div>
@@ -138,78 +138,15 @@
 <script>
 const HOME = {name:'家 · 金境玉上府', lat:29.4367, lon:119.2637};
 const SPOTS = [
-  {id:1, mode:'微物', region:'更楼', kind:'小溪', short:'石口桥', name:'甘溪 · 石口段', conf:'推荐', color:'green',
-   lat:29.4240, lon:119.2859, distance:'东 2.6km', drive:'约4.1km / 6分钟',
-   navName:'石口村', coord:'119.2859,29.4240',
-   park:'村口桥头空地；看到跨溪水泥桥，桥下就是潭',
-   route:'出小区上金岭线，向南约1km，到「云明眼镜/仁汇路口」右转进更邓线；沿溪开约2.6km，看到「石口村」路牌和跨溪水泥桥，桥头停车。',
-   points:'桥下深潭（先打桥墩下游回水）→ 桥上游第一个跌水下方 → 下游50m弯道外侧',
-   tackle:'1.8–2.1m UL，1.5–2.5g 亮片逆流抛、顺流收；飞蝇钩+助投器打浅滩；桥下小铅头+软虫。',
-   fish:'马口、宽鳍鱲、溪石斑',
-   note:'村道窄，别堵路；雨后水浑改天。'},
-  {id:2, mode:'微物', region:'更楼', kind:'小溪', short:'甘溪村桥', name:'甘溪 · 甘溪村段', conf:'可试', color:'orange',
-   lat:29.4228, lon:119.2943, distance:'东 3.5km', drive:'约5.1km / 8分钟',
-   navName:'甘溪村', coord:'119.2943,29.4228',
-   park:'村中桥；桥边小卖部/空地，步行1分钟',
-   route:'从1号沿更邓线继续1km，到甘溪村中桥；桥边空地停车。',
-   points:'坝下冲刷坑、桥墩两侧、树荫下的深色水',
-   tackle:'2–3g 亮片、小米诺；傍晚有捕食声时换小波爬/浮水米诺。',
-   fish:'马口、白条、小斑鳜',
-   note:'村道会车难，别堵路；水浑改天。'},
-  {id:3, mode:'微物', region:'更楼', kind:'小溪', short:'洪宅桥', name:'邓家溪 · 洪宅段', conf:'可试', color:'orange',
-   lat:29.4140, lon:119.3030, distance:'东南 4.6km', drive:'约6km / 9分钟',
-   navName:'洪宅村', coord:'119.3030,29.4140',
-   park:'甘南线进村第一座桥；桥头空地',
-   route:'上金岭线/G320 向东，到更邓线路口后沿更邓线到石口附近，看路牌转甘南线（往过塘源/石岭村方向）；进洪宅村第一座桥。',
-   points:'洪宅桥、后川畈小坝、连续跌水之间的潭',
-   tackle:'轻量亮片、飞蝇钩；溪窄，1.5–1.8m 短竿更好。',
-   fish:'马口、溪石斑',
-   note:'不要从2号往南抄小路，实际要绕17km；部分河段在治理施工，看到围挡换点。'},
-  {id:4, mode:'微物', region:'更楼', kind:'小溪', short:'石岭村桥', name:'石岭溪 · 石岭村', conf:'可试', color:'orange',
-   lat:29.4081, lon:119.2899, distance:'东南 4.1km', drive:'约6.8km / 10分钟',
-   navName:'石岭村', coord:'119.2899,29.4081',
-   park:'村口桥；桥头空地',
-   route:'从洪宅桥继续沿甘南线2km，到石岭村口桥。',
-   points:'桥下潭、上游石滩、倒树边',
-   tackle:'轻量亮片、飞蝇钩；1.5–1.8m 短竿。',
-   fish:'马口、宽鳍鱲',
-   note:'部分河段可能在整治，看到围挡换点。'},
-  {id:5, mode:'微物', region:'更楼', kind:'小溪', short:'桐子源', name:'桐子源—新街小溪', conf:'备选', color:'gray',
-   lat:29.4000, lon:119.2500, distance:'西南 4.3km', drive:'入口需现场确认',
-   navName:'桐子源村', coord:'119.2500,29.4000',
-   park:'村道沿溪，看到桥就停',
-   route:'高德搜「桐子源村」；村道沿溪，看到桥停。入口到现场确认。',
-   points:'村桥、拦水坝、汇入寿昌江的河口',
-   tackle:'轻量亮片、飞蝇钩。',
-   fish:'马口、白条',
-   note:'坐标是卫星示意，平缓段可能淤泥/季节性断流。'},
-  {id:6, mode:'微物', region:'更楼', kind:'小溪', short:'石马头桥', name:'石马溪 · 石马头', conf:'备选', color:'gray',
-   lat:29.4290, lon:119.2320, distance:'西 3.2km', drive:'约4.6km / 6分钟',
-   navName:'石马头村', coord:'119.2320,29.4290',
-   park:'更石线进村，桥头',
-   route:'更石线向西到石马头村，村桥；桥头停车。',
-   points:'桥下、采石场下游1km以外',
-   tackle:'轻量亮片、飞蝇钩。',
-   fish:'马口',
-   note:'采石场/重卡多，水可能浑；不建议雨后去。'},
   {id:7, mode:'微物', region:'寿昌', kind:'小溪', short:'寿昌镇南', name:'南浦溪/童家溪', conf:'备选', color:'gray',
-   lat:29.3830, lon:119.2300, distance:'西南 6.8km', drive:'约20分钟+',
-   navName:'寿昌镇', coord:'119.2300,29.3830',
+   lat:29.3830, lon:119.2307, distance:'西南 6.8km', drive:'约20分钟+',
+   navName:'寿昌镇', coord:'119.2307,29.3830',
    park:'先到寿昌镇问「南浦溪/童家溪」入口',
    route:'330国道向寿昌南，沿溪进山；具体入口到寿昌镇后问路。暂不推荐，等1–4踩完再去。',
    points:'山路桥、跌水、深潭',
    tackle:'轻量亮片、飞蝇钩；山路注意落石。',
    fish:'马口、溪石斑、小鳜',
    note:'距离最远，按半天行程；部分河段可能景区/水源保护，先确认。'},
-  {id:8, mode:'远投', region:'新安江', kind:'主河', short:'白沙大桥', name:'新安江 · 白沙大桥', conf:'推荐', color:'green',
-   lat:29.4785, lon:119.2830, distance:'西北 11km', drive:'约13km / 20分钟',
-   navName:'白沙大桥', coord:'119.2830,29.4785',
-   park:'白沙大桥/江滨公园停车位；桥下两岸都有步道',
-   route:'导航「白沙大桥」或「江滨公园」；到桥头沿步道下到江边。城区段选桥墩下游回水、灯光照到的浅滩。',
-   points:'桥墩下游回水 → 码头/亲水平台外侧 → 下游50m缓流带；夜钓找灯光边缘。',
-   tackle:'2.4–2.7m M（7–21g），10–18g 沉水米诺/铁板；桥墩外侧远投，夜间慢收。',
-   fish:'白条、马口、小翘嘴、赤眼',
-   note:'城区景观段，先看有没有禁钓牌；汛期开闸放水别下河；停车别堵江滨路。'},
   {id:9, mode:'远投', region:'新安江', kind:'主河', short:'洋安大桥', name:'新安江 · 洋安大桥', conf:'可试', color:'orange',
    lat:29.4925, lon:119.3030, distance:'东北 14km', drive:'约16km / 24分钟',
    navName:'洋安大桥', coord:'119.3030,29.4925',
@@ -219,15 +156,6 @@ const SPOTS = [
    tackle:'2.4–2.7m M，10–15g 米诺/铁板；沙洲外侧远投，搜中上层。',
    fish:'白条、马口、小翘嘴',
    note:'大桥上车快，别在桥面停车；下河点看水位。'},
-  {id:10, mode:'远投', region:'新安江', kind:'主河', short:'寿昌溪口', name:'新安江 · 寿昌溪入江口', conf:'推荐', color:'green',
-   lat:29.4895, lon:119.2565, distance:'西北 9km', drive:'约11km / 17分钟',
-   navName:'联塘村', coord:'119.2565,29.4895',
-   park:'联塘村/金岭线路边空地；沿江步道下到汇口',
-   route:'导航「联塘村」；到村口沿金岭线/江边小路走到寿昌溪入新安江的汇口。',
-   points:'两水交汇的沙洲/浅滩 → 寿昌溪下游第一个弯 → 新安江缓流带。',
-   tackle:'2.7m M，10–18g 铁板/米诺；打汇口缓流和沙洲外缘。',
-   fish:'马口、白条、小翘嘴、宽鳍鱲',
-   note:'汇口沙洲会随水位变，别站到主河道；雨后2–3天来。'},
   {id:11, mode:'远投', region:'新安江', kind:'主河', short:'下涯埠', name:'新安江 · 下涯埠（大洲溪口）', conf:'推荐', color:'green',
    lat:29.5252, lon:119.3728, distance:'东 20km', drive:'约22km / 30分钟',
    navName:'下涯埠', coord:'119.3728,29.5252',
@@ -238,19 +166,19 @@ const SPOTS = [
    fish:'马口、白条、宽鳍鱲、小翘嘴',
    note:'这是现住和美家园门口那条大洲溪的入江口，鱼情稳定；周末人多，停车别堵村道。'},
   {id:12, mode:'远投', region:'寿昌', kind:'主河', short:'于合大桥', name:'寿昌江 · 于合大桥', conf:'推荐', color:'green',
-   lat:29.3995, lon:119.2347, distance:'南 8km', drive:'约10km / 16分钟',
-   navName:'于合大桥', coord:'119.2347,29.3995',
+   lat:29.3995, lon:119.2359, distance:'南 8km', drive:'约10km / 16分钟',
+   navName:'于合大桥', coord:'119.2359,29.3995',
    park:'于合大桥桥头/于合村口空地',
    route:'导航「于合大桥」；桥头停车，桥下两岸都能下。',
    points:'桥墩下游深潭 → 坝下浅滩 → 上游弯道外侧。',
    tackle:'2.4–2.7m M，10–18g 米诺/铁板；桥下深潭和上游弯道。',
    fish:'马口、白条、溪石斑、小翘嘴',
    note:'桥上车多；坝下石头滑，穿溯溪鞋。'},
-  {id:13, mode:'远投', region:'寿昌', kind:'主河', short:'寿昌河湾', name:'寿昌江 · 寿昌镇河湾', conf:'可试', color:'orange',
-   lat:29.3920, lon:119.2230, distance:'西南 11km', drive:'约13km / 20分钟',
-   navName:'河南里村', coord:'119.2230,29.3920',
-   park:'河南里/滩下村口；沿河小路找空地',
-   route:'导航「河南里村」或「滩下村」；到村口沿河找堰坝/桥。',
+  {id:13, mode:'远投', region:'寿昌', kind:'主河', short:'寿昌南河湾', name:'寿昌江 · 寿昌镇南河湾', conf:'可试', color:'orange',
+   lat:29.3867, lon:119.2303, distance:'西南 11km', drive:'约13km / 20分钟',
+   navName:'刘家桥', coord:'119.2303,29.3867',
+   park:'刘家桥/高田畈村道边，桥头空地；别堵国道',
+   route:'导航「刘家桥」，G330 桥下；沿河找下河土路。',
    points:'堰坝下深潭、河湾缓流、浅滩交界。',
    tackle:'2.7m M，12–18g 铁板/沉水米诺；打河湾外侧深槽。',
    fish:'马口、白条、小翘嘴',
@@ -292,8 +220,8 @@ const SPOTS = [
    fish:'白条、小翘嘴、马口',
    note:'散步人多，注意身后抛投；有禁钓牌就换点。'},
   {id:18, mode:'微物', region:'新安江', kind:'主河', short:'和美家园门前', name:'大洲溪 · 和美家园门前', conf:'推荐', color:'green',
-   lat:29.5355, lon:119.3760, distance:'东 20km', drive:'约22km / 30分钟',
-   navName:'和美家园', coord:'119.3760,29.5355',
+   lat:29.5355, lon:119.37585, distance:'东 20km', drive:'约22km / 30分钟',
+   navName:'和美家园', coord:'119.37585,29.5355',
    park:'和美家园西区/和美路小桥；小区外路边停',
    route:'导航「和美家园」；到小区西侧和美路小桥，桥下就是大洲溪。',
    points:'小桥浅滩+小潭 → 下游堰坝 → 汇入新安江的河口。',
@@ -301,8 +229,8 @@ const SPOTS = [
    fish:'马口、白条、宽鳍鱲',
    note:'这是现住门口那条河，步行5分钟；别堵小区消防通道。'},
   {id:19, mode:'远投', region:'更楼', kind:'主河', short:'320桥上游', name:'寿昌江 · 320国道桥上游', conf:'推荐', color:'green',
-   lat:29.4320, lon:119.2580, distance:'西 1.5km', drive:'约2km / 5分钟',
-   navName:'更楼公铁立交桥', coord:'119.2580,29.4320',
+   lat:29.4318, lon:119.2609, distance:'西 1.5km', drive:'约2km / 5分钟',
+   navName:'更楼公铁立交桥', coord:'119.2609,29.4318',
    park:'桥头/艾溪路辅路边空地；别堵国道',
    route:'出西门沿艾溪路向南，到G320更楼公铁立交桥；从桥上游侧找下河土路。',
    points:'桥墩下游冲坑 → 桥前缓流带 → 上游第一个弯外侧。',
@@ -310,10 +238,10 @@ const SPOTS = [
    fish:'翘嘴、赤眼、斑鳜',
    note:'桥上车多，别在桥面停车；汛期水流急，别下深水。'},
   {id:20, mode:'远投', region:'更楼', kind:'主河', short:'黄岙河湾', name:'寿昌江 · 后塘/黄岙河湾', conf:'可试', color:'orange',
-   lat:29.4250, lon:119.2500, distance:'西南 3.5km', drive:'约5km / 9分钟',
-   navName:'后塘村', coord:'119.2500,29.4250',
-   park:'后塘村口/河湾土路空地；村道窄，别堵路',
-   route:'导航「后塘村」，沿村道到寿昌江边，找连续弯道外侧的下河土路。',
+   lat:29.4222, lon:119.2563, distance:'西南 3.5km', drive:'约5km / 9分钟',
+   navName:'黄岙村', coord:'119.2563,29.4222',
+   park:'黄岙村口/河湾土路空地；村道窄，别堵路',
+   route:'导航「黄岙村」，沿村道到寿昌江边，找连续弯道外侧的下河土路。',
    points:'弯道外侧深槽 → 对岸缓流 → 下游浅滩尾水。',
    tackle:'2.7m M，12–18g 铁板/沉水米诺；站弯外侧打对岸深浅交界。',
    fish:'翘嘴、赤眼、小鳡鱼',
@@ -327,18 +255,9 @@ const SPOTS = [
    tackle:'2.4–2.7m M，10–15g 米诺/铁板；水面宽，搜中上层。',
    fish:'翘嘴、白条群、赤眼',
    note:'河段示意；部分岸段有树，先看身后再抛。'},
-  {id:22, mode:'远投', region:'新安江', kind:'主河', short:'新安江大桥', name:'新安江 · 新安江大桥/江滨公园', conf:'推荐', color:'green',
-   lat:29.4780, lon:119.2930, distance:'西北 12km', drive:'约14km / 22分钟',
-   navName:'新安江大桥', coord:'119.2930,29.4780',
-   park:'江滨公园/大桥下游停车位；沿步道下江边',
-   route:'导航「新安江大桥」或「江滨公园」，桥头停车后沿步道下到江边。',
-   points:'桥墩下游回水 → 江滨缓流带 → 下游50m深浅交界。',
-   tackle:'2.7m M，15–20g 铁板/沉水米诺；城区江面宽，抛远搜中下层。',
-   fish:'翘嘴、赤眼、鳡鱼',
-   note:'城区景观段，先看禁钓牌；汛期开闸别下河；停车别堵江滨路。'},
   {id:23, mode:'远投', region:'寿昌', kind:'主河', short:'寿昌大桥', name:'寿昌江 · 寿昌大桥/镇区河湾', conf:'可试', color:'orange',
-   lat:29.4040, lon:119.2240, distance:'西南 10km', drive:'约12km / 18分钟',
-   navName:'寿昌镇', coord:'119.2240,29.4040',
+   lat:29.4040, lon:119.2365, distance:'西南 10km', drive:'约12km / 18分钟',
+   navName:'寿昌镇', coord:'119.2365,29.4040',
    park:'寿昌大桥桥头/镇区河堤空地',
    route:'导航「寿昌镇」，到寿昌大桥；桥头停车后沿河堤找下河口。',
    points:'桥下深潭 → 镇区河湾外侧 → 下游堰坝尾水。',
@@ -353,6 +272,7 @@ L.tileLayer('https://webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z=
 }).addTo(map);
 
 let active = 'all';
+let booted = false;
 const markers = [];
 const icon = (s) => L.divIcon({
   className:'', iconSize:[26,26], iconAnchor:[13,26],
@@ -383,7 +303,17 @@ function draw(){
   document.getElementById('count').textContent = list.length;
   renderCards(list);
   map.invalidateSize();
-  fitTo(list);
+  if (!booted) booted = true;
+  const views = {
+    all: [29.4593, 119.2995, 12],
+    '微物': [29.445, 119.300, 12],
+    '远投': [29.445, 119.290, 11],
+    '更楼': [29.430, 119.255, 13],
+    '新安江': [29.480, 119.300, 11],
+    '寿昌': [29.398, 119.243, 12]
+  };
+  const v = views[active] || views.all;
+  map.setView([v[0], v[1]], v[2], {animate:false});
 }
 function fitTo(list){
   if(!list.length) return;
@@ -404,7 +334,7 @@ function renderCards(list){
   });
 }
 function renderFilters(){
-  const opts = [['all','全部 23'],['微物','微物'],['远投','远投'],['更楼','更楼'],['新安江','新安江'],['寿昌','寿昌']];
+  const opts = [['all','全部 14'],['微物','微物'],['远投','远投'],['更楼','更楼'],['新安江','新安江'],['寿昌','寿昌']];
   document.getElementById('filters').innerHTML = opts.map(([k,l]) =>
     `<div class="chip ${active===k?'on':''}" data-k="${k}">${l}</div>`).join('');
   document.querySelectorAll('.chip').forEach(el => {
@@ -435,13 +365,12 @@ document.getElementById('detail').onclick = (e) => {
   if (e.target.id === 'detail') document.getElementById('detail').classList.remove('on');
 };
 renderFilters(); draw();
-setTimeout(() => { map.invalidateSize(); fitTo(SPOTS); }, 350);
+setTimeout(() => { if (active === 'all') { map.invalidateSize(); map.setView([29.4593, 119.2995], 12, {animate:false}); } }, 800);
 function resetView(){
   active = 'all';
   renderFilters();
   draw();
 }
-setTimeout(() => { map.invalidateSize(); resetView(); }, 120);
 window.addEventListener('resize', () => { map.invalidateSize(); });
 </script>
 </body>
